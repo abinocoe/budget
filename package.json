@@ -3,10 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "lint": "tslint --project ./ --config tslint.json",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.119",
+    "lodash": "^4.17.11",
+    "moment": "^2.23.0",
     "react": "16.6.3",
     "react-native": "0.57.8"
   },
