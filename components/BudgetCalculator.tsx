@@ -3,6 +3,7 @@ import SafeAreaView from "react-native-safe-area-view";
 
 import DayInputs from "./DayInputsContainer";
 import PeriodAllowanceInput from "./PeriodAllowance";
+import RemainderCalculations from "./RemainderCalculations";
 
 interface State {
   dailyAmountsSpent: any;
@@ -50,6 +51,13 @@ class BudgetCalculator extends Component<{}, State> {
         <PeriodAllowanceInput
           allowanceAmount={this.state.periodTotalAmount}
           updateAllowance={this.updatePeriodTotal}
+        />
+        <RemainderCalculations
+          dailyAllowance={1860}
+          daysElapsed={10}
+          daysRemaining={10}
+          totalAllowance={this.state.periodTotalAmount}
+          totalSpent={this.state.periodTotalSpent}
         />
         <DayInputs
           startNumber={25}
