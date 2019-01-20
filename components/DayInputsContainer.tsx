@@ -1,13 +1,22 @@
 import _ from "lodash";
 import React from "react";
-import { Text, TextInput, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
+
+import Day from "./Day";
 
 interface Props {
+  amountsSpent: { [index: number]: number };
   startNumber: number;
   totalAllowance: number;
+  updateAmountSpent: (amount: number, day: number) => void;
 }
 
-const DayInputs = ({ startNumber, totalAllowance }: Props) => {
+const DayInputsContainer = ({
+  amountsSpent,
+  startNumber,
+  totalAllowance,
+  updateAmountSpent
+}: Props) => {
   const today = new Date();
   const dateToday = today.getDate();
   const daysInMonth =
@@ -25,7 +34,7 @@ const DayInputs = ({ startNumber, totalAllowance }: Props) => {
     days = _.range(startNumber, dateToday + 1);
   }
   return (
-    <View style={{ width: "90%" }}>
+    <View style={{ flex: 1 }}>
       <Text>
         {totalAllowance
           ? (Math.round(totalAllowance / daysInMonth) / 100)
@@ -33,22 +42,18 @@ const DayInputs = ({ startNumber, totalAllowance }: Props) => {
               .toString()
           : "0.00"}
       </Text>
-      {days.map(date => (
-        <View style={{ flexDirection: "row", paddingVertical: 10 }} key={date}>
-          <Text>{date}</Text>
-          <TextInput
-            keyboardType="number-pad"
-            style={{
-              borderColor: "red",
-              borderWidth: 1,
-              width: "10%",
-              marginHorizontal: 4
-            }}
+      <ScrollView style={{ width: "100%" }}>
+        {days.map(date => (
+          <Day
+            amountSpent={amountsSpent[date]}
+            date={date}
+            key={date}
+            updateAmountSpent={updateAmountSpent}
           />
-        </View>
-      ))}
+        ))}
+      </ScrollView>
     </View>
   );
 };
 
-export default DayInputs;
+export default DayInputsContainer;
