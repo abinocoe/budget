@@ -58,12 +58,12 @@ class BudgetCalculator extends Component<{}, State> {
 
   public render() {
     const periodStartMonth = getPeriodStartMonth(this.state.periodStartDate);
+    const daysInStartMonth = numberOfDaysInStartMonth(periodStartMonth);
     const daysElapsed = getDisplayDays(
       this.state.periodStartDate,
       periodStartMonth
     ).length;
-    const daysRemaining =
-      numberOfDaysInStartMonth(periodStartMonth) - daysElapsed;
+    const daysRemaining = daysInStartMonth - daysElapsed;
     return (
       <SafeAreaView
         forceInset={{ top: "always", bottom: "always" }}
@@ -89,6 +89,7 @@ class BudgetCalculator extends Component<{}, State> {
           totalAllowance={this.state.periodTotalAmount}
           updateAmountSpent={this.updateDayAmountSpent}
           amountsSpent={this.state.dailyAmountsSpent}
+          daysInStartMonth={daysInStartMonth}
         />
       </SafeAreaView>
     );

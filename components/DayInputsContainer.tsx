@@ -2,12 +2,13 @@ import _ from "lodash";
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
 
-import { getDisplayDays, numberOfDaysInStartMonth } from "../lib/date";
+import { getDisplayDays, getPeriodStartMonth } from "../lib/date";
 
 import Day from "./Day";
 
 interface Props {
   amountsSpent: { [index: number]: number };
+  daysInStartMonth: number;
   startNumber: number;
   totalAllowance: number;
   updateAmountSpent: (amount: number, day: number) => void;
@@ -15,16 +16,17 @@ interface Props {
 
 const DayInputsContainer = ({
   amountsSpent,
+  daysInStartMonth,
   startNumber,
   totalAllowance,
   updateAmountSpent
 }: Props) => {
-  const days = getDisplayDays(startNumber, 0);
+  const days = getDisplayDays(startNumber, getPeriodStartMonth(startNumber));
   return (
     <View style={{ flex: 1 }}>
       <Text>
         {totalAllowance
-          ? (Math.round(totalAllowance / numberOfDaysInStartMonth(0)) / 100)
+          ? (Math.floor(totalAllowance / daysInStartMonth) / 100)
               .toFixed(2)
               .toString()
           : "0.00"}
