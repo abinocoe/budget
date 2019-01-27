@@ -2,6 +2,8 @@ import _ from "lodash";
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
 
+import { getDisplayDays, numberOfDaysInStartMonth } from "../lib/date";
+
 import Day from "./Day";
 
 interface Props {
@@ -17,27 +19,12 @@ const DayInputsContainer = ({
   totalAllowance,
   updateAmountSpent
 }: Props) => {
-  const today = new Date();
-  const dateToday = today.getDate();
-  const daysInMonth =
-    32 - new Date(today.getFullYear(), today.getMonth(), 32).getDate();
-  let days: number[];
-  if (dateToday < startNumber) {
-    days = [
-      ..._.range(startNumber, daysInMonth + 1).concat(
-        dateToday === 1 ? [1] : _.range(1, dateToday + 1)
-      )
-    ];
-  } else if (dateToday === startNumber) {
-    days = [startNumber];
-  } else {
-    days = _.range(startNumber, dateToday + 1);
-  }
+  const days = getDisplayDays(startNumber, 0);
   return (
     <View style={{ flex: 1 }}>
       <Text>
         {totalAllowance
-          ? (Math.round(totalAllowance / daysInMonth) / 100)
+          ? (Math.round(totalAllowance / numberOfDaysInStartMonth(0)) / 100)
               .toFixed(2)
               .toString()
           : "0.00"}
