@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SafeAreaView from "react-native-safe-area-view";
+import { StyleSheet, Text, View } from "react-native";
 
 import {
   getDisplayDays,
@@ -65,9 +66,10 @@ class BudgetCalculator extends Component<{}, State> {
     ).length;
     const daysRemaining = daysInStartMonth - daysElapsed;
     return (
-      <SafeAreaView
+    
+      <SafeAreaView 
         forceInset={{ top: "always", bottom: "always" }}
-        style={{ flex: 1 }}
+        style={styles.bg}
       >
         <DateSelection
           intervalStartDate={this.state.periodStartDate}
@@ -92,8 +94,16 @@ class BudgetCalculator extends Component<{}, State> {
           daysInStartMonth={daysInStartMonth}
         />
       </SafeAreaView>
+   
     );
   }
 }
+
+const styles = StyleSheet.create({
+  bg: {
+    backgroundColor: "#212D59",
+    flex: 1 
+  },
+});
 
 export default BudgetCalculator;

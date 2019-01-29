@@ -19,19 +19,19 @@ const RemainderCalculations = ({
   const amountRemaining = totalAllowance - totalSpent;
   const decimalise = (amount: number) => (amount / 100).toFixed(2).toString();
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.row}>
-        <Text>{`Total Remaining: ${decimalise(amountRemaining)}`}</Text>
+        <Text style={styles.remainingText}>{`Total Remaining: ${decimalise(amountRemaining)}`}</Text>
       </View>
       <View style={styles.row}>
-        <Text>
+        <Text style={styles.remainingText}>
           {`Amount credit: ${decimalise(
             dailyAllowance * daysElapsed - totalSpent
           )}`}
         </Text>
       </View>
       <View style={styles.row}>
-        <Text>
+        <Text style={styles.remainingText}>
           {`Average per day remain: ${decimalise(
             amountRemaining / daysRemaining
           )}`}
@@ -42,8 +42,30 @@ const RemainderCalculations = ({
 };
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 10,
+  },
   row: {
-    flexDirection: "row"
+    flexDirection: "row",    
+    marginRight: 40,
+    marginTop: 16,
+    borderBottomLeftRadius: 0,
+		borderBottomRightRadius: 100,
+		borderTopLeftRadius: 0,
+		borderTopRightRadius: 100,
+    // borderRadius: 4,
+    // borderWidth:2,
+    // borderColor: "red",
+    backgroundColor: "#364686",
+    shadowOffset:{width: 8,  height: 8,},
+    shadowColor: '#1A2149',
+    shadowOpacity: 0.6,
+  },
+  remainingText: {
+    color: "#FBFCFF",
+    fontSize: 20,
+    padding: 24,
+    width: "100%",
   }
 });
 
