@@ -43,28 +43,23 @@ const RemainderCalculations = ({
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 10,
+    marginTop: 16,
   },
   row: {
     flexDirection: "row",    
-    marginRight: 40,
-    marginTop: 16,
-    borderBottomLeftRadius: 0,
-		borderBottomRightRadius: 100,
-		borderTopLeftRadius: 0,
-		borderTopRightRadius: 100,
-    // borderRadius: 4,
-    // borderWidth:2,
-    // borderColor: "red",
-    backgroundColor: "#364686",
-    shadowOffset:{width: 8,  height: 8,},
-    shadowColor: '#1A2149',
-    shadowOpacity: 0.6,
+    margin: 16,
+    borderBottomWidth: 0.5,
+    borderBottomColor: 'rgba(255,255,255,0.2)',
+    // backgroundColor: "#364686",
+    // shadowOffset:{width: 8,  height: 8,},
+    // shadowColor: '#1A2149',
+    // shadowOpacity: 0.6,
   },
   remainingText: {
+    // color: "#D36ED9", 
     color: "#FBFCFF",
     fontSize: 20,
-    padding: 24,
+    paddingBottom: 32,
     width: "100%",
   }
 });

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 
 interface Props {
   allowanceAmount: number;
@@ -9,8 +9,8 @@ interface Props {
 class PeriodAllowanceInput extends Component<Props> {
   public render() {
     return (
-      <View style={{ borderWidth: 1, borderColor: "black" }}>
-        <TextInput
+      <View style={styles.allowanceInput}>
+        <TextInput 
           onChangeText={(text: any) => {
             this.props.updateAllowance(text);
           }}
@@ -25,5 +25,20 @@ class PeriodAllowanceInput extends Component<Props> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  allowanceInput: {
+    fontSize: 36,
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
+    padding: 24,
+    borderWidth: 2, 
+    borderColor: '#FFF9D0',
+    borderRadius: 4,
+    backgroundColor: 'rgba(255,249,208,0.8)',
+    margin: 16,
+  },
+});
 
 export default PeriodAllowanceInput;

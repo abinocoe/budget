@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SafeAreaView from "react-native-safe-area-view";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 
 import {
   getDisplayDays,
@@ -71,37 +71,38 @@ class BudgetCalculator extends Component<{}, State> {
         forceInset={{ top: "always", bottom: "always" }}
         style={styles.bg}
       >
-        <DateSelection
-          intervalStartDate={this.state.periodStartDate}
-          updateIntervalStartDate={this.updatePeriodStart}
-        />
-        <PeriodAllowanceInput
-          allowanceAmount={this.state.periodTotalAmount}
-          updateAllowance={this.updatePeriodTotal}
-        />
-        <RemainderCalculations
-          dailyAllowance={1818}
-          daysElapsed={daysElapsed}
-          daysRemaining={daysRemaining}
-          totalAllowance={this.state.periodTotalAmount}
-          totalSpent={this.state.periodTotalSpent}
-        />
-        <DayInputs
-          startNumber={this.state.periodStartDate}
-          totalAllowance={this.state.periodTotalAmount}
-          updateAmountSpent={this.updateDayAmountSpent}
-          amountsSpent={this.state.dailyAmountsSpent}
-          daysInStartMonth={daysInStartMonth}
-        />
+        <ScrollView>
+          <DateSelection
+            intervalStartDate={this.state.periodStartDate}
+            updateIntervalStartDate={this.updatePeriodStart}
+          />
+          <PeriodAllowanceInput
+            allowanceAmount={this.state.periodTotalAmount}
+            updateAllowance={this.updatePeriodTotal}
+          />
+          <RemainderCalculations
+            dailyAllowance={1818}
+            daysElapsed={daysElapsed}
+            daysRemaining={daysRemaining}
+            totalAllowance={this.state.periodTotalAmount}
+            totalSpent={this.state.periodTotalSpent}
+          />
+          <DayInputs
+            startNumber={this.state.periodStartDate}
+            totalAllowance={this.state.periodTotalAmount}
+            updateAmountSpent={this.updateDayAmountSpent}
+            amountsSpent={this.state.dailyAmountsSpent}
+            daysInStartMonth={daysInStartMonth}
+          />
+        </ScrollView>
       </SafeAreaView>
-   
     );
   }
 }
 
 const styles = StyleSheet.create({
   bg: {
-    backgroundColor: "#212D59",
+    backgroundColor: "#FCAC8E",
     flex: 1 
   },
 });

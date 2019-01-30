@@ -1,6 +1,6 @@
 import _ from "lodash";
 import React from "react";
-import { StyleSheet, ScrollView, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import { getDisplayDays, getPeriodStartMonth } from "../lib/date";
 
@@ -23,7 +23,7 @@ const DayInputsContainer = ({
 }: Props) => {
   const days = getDisplayDays(startNumber, getPeriodStartMonth(startNumber));
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.highlight}>
         <Text style={styles.remainingTotal}>
           {totalAllowance
@@ -33,33 +33,36 @@ const DayInputsContainer = ({
             : "0.00"}
         </Text>
       </View>
-      <ScrollView style={{ width: "100%" }}>
+      <View style={{ width: "100%" }}>
         {days.map(date => (
-          <Day 
+          <Day
             amountSpent={amountsSpent[date]}
             date={date}
             key={date}
             updateAmountSpent={updateAmountSpent}
           />
         ))}
-      </ScrollView>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  
+  // daily allowance remaining 
+  container: {
+    margin: 16,
+  },
+  
   highlight: {
-    backgroundColor: "#A1175D",
     borderRadius: 100,
     borderWidth: 2,
-    borderColor: "#C61E73",
-    marginTop: 16,
-    marginBottom: 16,
+    borderColor: "#F887B7",
+    backgroundColor: "rgba(248, 135, 183, 0.7)",
+    marginTop: 8,
+    marginBottom: 24,
     marginLeft: 80,
     marginRight: 80,
-    shadowOffset:{  width: 8,  height: 8,  },
-    shadowColor: '#1A2149',
-    shadowOpacity: 0.6,
   },
   
   remainingTotal: {
@@ -67,8 +70,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
     textAlign: "center",
-    padding: 8,
-  }
+    padding: 16,
+  },
+
 });
 
 export default DayInputsContainer;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 
 interface Props {
   amountSpent: number;
@@ -14,17 +14,11 @@ class Day extends Component<Props> {
         style={{ flexDirection: "row", paddingVertical: 10 }}
         key={this.props.date}
       >
-        <Text>{this.props.date}</Text>
-        <TextInput
+        <Text style={styles.dayText}>{this.props.date}</Text>
+        <TextInput style={styles.amountText}
           keyboardType="number-pad"
           onChangeText={(text: any) => {
             this.props.updateAmountSpent(parseInt(text, 10), this.props.date);
-          }}
-          style={{
-            borderColor: "red",
-            borderWidth: 1,
-            width: "10%",
-            marginHorizontal: 4
           }}
           value={
             isNaN(this.props.amountSpent)
@@ -37,4 +31,23 @@ class Day extends Component<Props> {
   }
 }
 
+const styles = StyleSheet.create({
+  dayText: {
+    fontSize: 20,
+    // fontWeight: "regular",
+    color: "white",
+    marginTop: 12,
+    marginRight: 8,
+  },
+
+  amountText: {
+    width: "38%",
+    padding: 16,
+    borderWidth: 2, 
+    borderColor: '#FFF9D0',
+    borderRadius: 4,
+    backgroundColor: 'rgba(255,249,208,0.8)',
+    marginHorizontal: 4,
+  }
+});
 export default Day;
