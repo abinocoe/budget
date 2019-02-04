@@ -102,7 +102,7 @@ class BudgetCalculator extends Component<{}, State> {
 
 const styles = StyleSheet.create({
   bg: {
-    backgroundColor: "#FCAC8E",
+    backgroundColor: "#FB9190",
     flex: 1 
   },
 });

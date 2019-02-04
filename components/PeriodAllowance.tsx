@@ -9,7 +9,7 @@ interface Props {
 class PeriodAllowanceInput extends Component<Props> {
   public render() {
     return (
-      <View style={styles.allowanceInput}>
+      <View style={styles.allowanceInput} >
         <TextInput 
           onChangeText={(text: any) => {
             this.props.updateAllowance(text);
@@ -38,6 +38,10 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: 'rgba(255,249,208,0.8)',
     margin: 16,
+  },
+  bg: {
+    backgroundColor: "#FB9190",
+    flex: 1 
   },
 });
 
