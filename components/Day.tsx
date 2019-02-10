@@ -18,7 +18,9 @@ class Day extends Component<Props> {
         <TextInput
           keyboardType="number-pad"
           onChangeText={(text: any) => {
-            this.props.updateAmountSpent(parseInt(text, 10), this.props.date);
+            if (!isNaN(text)) {
+              this.props.updateAmountSpent(parseInt(text, 10), this.props.date);
+            }
           }}
           style={{
             borderColor: "red",

@@ -43,13 +43,20 @@ class BudgetCalculator extends Component<{}, State> {
   };
 
   public updateDayAmountSpent = (amountSpent: number, date: number) => {
+    let periodTotalSpent = 0;
     const dailyAmountsSpent = {
       ...this.state.dailyAmountsSpent,
       [date]: amountSpent
     };
-    const periodTotalSpent = Object.keys(dailyAmountsSpent)
-      .map((k: string) => dailyAmountsSpent[k])
-      .reduce((a, b) => a + b);
+    if (isNaN(amountSpent)) {
+      delete dailyAmountsSpent[date];
+    }
+    const dayTotalArray = Object.keys(dailyAmountsSpent);
+    if (dayTotalArray.length > 0) {
+      periodTotalSpent = dayTotalArray
+        .map((k: string) => dailyAmountsSpent[k])
+        .reduce((a, b) => a + b);
+    }
     this.setState({
       dailyAmountsSpent,
       periodTotalSpent
