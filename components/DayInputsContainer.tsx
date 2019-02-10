@@ -8,29 +8,21 @@ import Day from "./Day";
 
 interface Props {
   amountsSpent: { [index: number]: number };
-  daysInStartMonth: number;
+  dailyAllowance: number;
   startNumber: number;
-  totalAllowance: number;
   updateAmountSpent: (amount: number, day: number) => void;
 }
 
 const DayInputsContainer = ({
   amountsSpent,
-  daysInStartMonth,
+  dailyAllowance,
   startNumber,
-  totalAllowance,
   updateAmountSpent
 }: Props) => {
   const days = getDisplayDays(startNumber, getPeriodStartMonth(startNumber));
   return (
     <View style={{ flex: 1 }}>
-      <Text>
-        {totalAllowance
-          ? (Math.floor(totalAllowance / daysInStartMonth) / 100)
-              .toFixed(2)
-              .toString()
-          : "0.00"}
-      </Text>
+      <Text>{dailyAllowance}</Text>
       <ScrollView style={{ width: "100%" }}>
         {days.map(date => (
           <Day
