@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for components/BudgetCalculator.tsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">components</a> BudgetCalculator.tsx
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">31.58% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>12/38</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">12.5% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">29.73% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>11/37</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from "react";
+import SafeAreaView from "react-native-safe-area-view";
+&nbsp;
+import {
+  getDisplayDays,
+  getPeriodStartMonth,
+  numberOfDaysInStartMonth
+} from "../lib/date";
+&nbsp;
+import DateSelection from "./DateSelection";
+import DayInputs from "./DayInputsContainer";
+import PeriodAllowanceInput from "./PeriodAllowance";
+import RemainderCalculations from "./RemainderCalculations";
+&nbsp;
+interface State {
+  dailyAmountsSpent: any;
+  // dailyAmountsSpent: { [key: string]: number };
+  periodTotalAmount: number;
+  periodTotalSpent: number;
+  periodStartDate: number;
+}
+&nbsp;
+class BudgetCalculator extends Component&lt;{}, State&gt; {
+<span class="fstat-no" title="function not covered" >  public constructor(</span>props: any) {
+<span class="cstat-no" title="statement not covered" >    super(props);</span>
+<span class="cstat-no" title="statement not covered" >    this.state = {</span>
+      dailyAmountsSpent: {},
+      periodTotalAmount: 50000,
+      periodTotalSpent: 0,
+      periodStartDate: 25
+    };
+<span class="cstat-no" title="statement not covered" >    this.updatePeriodTotal.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >    this.updateDayAmountSpent.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >    this.updatePeriodStart.bind(this);</span>
+  }
+&nbsp;
+  public <span class="cstat-no" title="statement not covered" >updatePeriodTotal = <span class="fstat-no" title="function not covered" >(</span>newTotal: string) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    this.setState({ periodTotalAmount: parseInt(newTotal, 10) });</span>
+  };
+&nbsp;
+  public <span class="cstat-no" title="statement not covered" >updatePeriodStart = <span class="fstat-no" title="function not covered" >(</span>newStartDate: number) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    this.setState({ periodStartDate: newStartDate });</span>
+  };
+&nbsp;
+  public <span class="cstat-no" title="statement not covered" >updateDayAmountSpent = <span class="fstat-no" title="function not covered" >(</span>amountSpent: number, date: number) =&gt; {</span>
+    let periodTotalSpent = <span class="cstat-no" title="statement not covered" >0;</span>
+    const dailyAmountsSpent<span class="cstat-no" title="statement not covered" > = {</span>
+      ...this.state.dailyAmountsSpent,
+      [date]: amountSpent
+    };
+<span class="cstat-no" title="statement not covered" >    if (isNaN(amountSpent)) {</span>
+<span class="cstat-no" title="statement not covered" >      delete dailyAmountsSpent[date];</span>
+    }
+    const dayTotalArray = <span class="cstat-no" title="statement not covered" >Object.keys(dailyAmountsSpent);</span>
+<span class="cstat-no" title="statement not covered" >    if (dayTotalArray.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      periodTotalSpent = dayTotalArray</span>
+        .map(<span class="fstat-no" title="function not covered" >(</span>k: string) =&gt; <span class="cstat-no" title="statement not covered" >dailyAmountsSpent[k])</span>
+        .reduce(<span class="fstat-no" title="function not covered" >(</span>a, b) =&gt; <span class="cstat-no" title="statement not covered" >a + b)</span>;
+    }
+<span class="cstat-no" title="statement not covered" >    this.setState({</span>
+      dailyAmountsSpent,
+      periodTotalSpent
+    });
+  };
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public render() {</span>
+    const periodStartMonth = <span class="cstat-no" title="statement not covered" >getPeriodStartMonth(this.state.periodStartDate);</span>
+    const daysInStartMonth = <span class="cstat-no" title="statement not covered" >numberOfDaysInStartMonth(periodStartMonth);</span>
+    const daysElapsed = <span class="cstat-no" title="statement not covered" >getDisplayDays(</span>
+      this.state.periodStartDate,
+      periodStartMonth
+    ).length;
+    const daysRemaining = <span class="cstat-no" title="statement not covered" >daysInStartMonth - daysElapsed;</span>
+    const dailyAllowance =
+<span class="cstat-no" title="statement not covered" >      Math.floor(this.state.periodTotalAmount / daysInStartMonth) / 100;</span>
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;SafeAreaView
+        forceInset={{ top: "always", bottom: "always" }}
+        style={{ flex: 1 }}
+      &gt;
+        &lt;DateSelection
+          intervalStartDate={this.state.periodStartDate}
+          updateIntervalStartDate={this.updatePeriodStart}
+        /&gt;
+        &lt;PeriodAllowanceInput
+          allowanceAmount={this.state.periodTotalAmount}
+          updateAllowance={this.updatePeriodTotal}
+        /&gt;
+        &lt;RemainderCalculations
+          dailyAllowance={dailyAllowance}
+          daysElapsed={daysElapsed}
+          daysRemaining={daysRemaining}
+          totalAllowance={this.state.periodTotalAmount}
+          totalSpent={this.state.periodTotalSpent}
+        /&gt;
+        &lt;DayInputs
+          dailyAllowance={dailyAllowance}
+          startNumber={this.state.periodStartDate}
+          updateAmountSpent={this.updateDayAmountSpent}
+          amountsSpent={this.state.dailyAmountsSpent}
+        /&gt;
+      &lt;/SafeAreaView&gt;
+    );
+  }
+}
+&nbsp;
+export default BudgetCalculator;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Feb 11 2019 10:11:00 GMT+0000 (Greenwich Mean Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

@@ -15,14 +15,20 @@
     "react-native-safe-area-view": "^0.12.0"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.1.17",
+    "@types/jest": "^24.0.0",
     "@types/react": "^16.7.18",
     "@types/react-native": "^0.57.23",
     "babel-jest": "23.6.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
     "jest": "23.6.0",
-    "metro-react-native-babel-preset": "0.51.1",
+    "metro-react-native-babel-preset": "^0.51.1",
     "prettier": "1.15.3",
+    "react-dom": "^16.8.1",
     "react-native-typescript-transformer": "^1.2.11",
     "react-test-renderer": "16.6.3",
+    "ts-jest": "^23.10.5",
     "tslint": "^5.12.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.17.0",
@@ -32,6 +38,24 @@
     "typescript": "^3.2.2"
   },
   "jest": {
-    "preset": "react-native"
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/src/lib/test-utils/",
+      "<rootDir>/package.json"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "preset": "react-native",
+    "setupTestFrameworkScriptFile": "<rootDir>test-setup.js",
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest",
+      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+    }
   }
 }

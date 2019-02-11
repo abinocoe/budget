@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <BudgetCalculator />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <DateSelection
+          intervalStartDate={25}
+          updateIntervalStartDate={[Function]}
+        />,
+        <PeriodAllowanceInput
+          allowanceAmount={50000}
+          updateAllowance={[Function]}
+        />,
+        <RemainderCalculations
+          dailyAllowance={16.12}
+          daysElapsed={18}
+          daysRemaining={13}
+          totalAllowance={50000}
+          totalSpent={0}
+        />,
+        <DayInputsContainer
+          amountsSpent={Object {}}
+          dailyAllowance={16.12}
+          startNumber={25}
+          updateAmountSpent={[Function]}
+        />,
+      ],
+      "forceInset": Object {
+        "bottom": "always",
+        "top": "always",
+      },
+      "style": Object {
+        "flex": 1,
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "intervalStartDate": 25,
+          "updateIntervalStartDate": [Function],
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "allowanceAmount": 50000,
+          "updateAllowance": [Function],
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "dailyAllowance": 16.12,
+          "daysElapsed": 18,
+          "daysRemaining": 13,
+          "totalAllowance": 50000,
+          "totalSpent": 0,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "amountsSpent": Object {},
+          "dailyAllowance": 16.12,
+          "startNumber": 25,
+          "updateAmountSpent": [Function],
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <DateSelection
+            intervalStartDate={25}
+            updateIntervalStartDate={[Function]}
+          />,
+          <PeriodAllowanceInput
+            allowanceAmount={50000}
+            updateAllowance={[Function]}
+          />,
+          <RemainderCalculations
+            dailyAllowance={16.12}
+            daysElapsed={18}
+            daysRemaining={13}
+            totalAllowance={50000}
+            totalSpent={0}
+          />,
+          <DayInputsContainer
+            amountsSpent={Object {}}
+            dailyAllowance={16.12}
+            startNumber={25}
+            updateAmountSpent={[Function]}
+          />,
+        ],
+        "forceInset": Object {
+          "bottom": "always",
+          "top": "always",
+        },
+        "style": Object {
+          "flex": 1,
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "intervalStartDate": 25,
+            "updateIntervalStartDate": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "allowanceAmount": 50000,
+            "updateAllowance": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "dailyAllowance": 16.12,
+            "daysElapsed": 18,
+            "daysRemaining": 13,
+            "totalAllowance": 50000,
+            "totalSpent": 0,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "amountsSpent": Object {},
+            "dailyAllowance": 16.12,
+            "startNumber": 25,
+            "updateAmountSpent": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;
