@@ -36,6 +36,7 @@ class BudgetCalculator extends Component<{}, State> {
 
   public componentWillMount() {
     this.fetchData();
+    this.handlePreviousMonths();
   }
 
   public updatePeriodTotal = (newTotal: string) => {
@@ -112,6 +113,26 @@ class BudgetCalculator extends Component<{}, State> {
       </SafeAreaView>
     );
   }
+
+  private handlePreviousMonths = async () => {
+    const newDate = new Date();
+    newDate.setMonth(newDate.getMonth(), -1);
+    const lastMonthsData = await AsyncStorage.getItem(`${newDate.getMonth()}`);
+    if (lastMonthsData !== null) {
+      const data = JSON.parse(lastMonthsData);
+      if (data.periodTotalAmount && data.periodTotalSpent) {
+        await AsyncStorage.setItem(
+          `${newDate.getMonth()}`,
+          (data.periodTotalAmount - data.periodTotalSpent).toString()
+        );
+      }
+    }
+    newDate.setMonth(newDate.getMonth(), -1);
+    const monthBeforeThat = await AsyncStorage.getItem(`${newDate.getMonth()}`);
+    if (monthBeforeThat !== null) {
+      await AsyncStorage.removeItem(`${newDate.getMonth()}`);
+    }
+  };
 
   private storeData = async () => {
     const today = new Date();
