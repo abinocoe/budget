@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { AsyncStorage } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 
 import {
@@ -14,7 +15,6 @@ import RemainderCalculations from "./RemainderCalculations";
 
 interface State {
   dailyAmountsSpent: any;
-  // dailyAmountsSpent: { [key: string]: number };
   periodTotalAmount: number;
   periodTotalSpent: number;
   periodStartDate: number;
@@ -34,12 +34,19 @@ class BudgetCalculator extends Component<{}, State> {
     this.updatePeriodStart.bind(this);
   }
 
+  public componentWillMount() {
+    this.fetchData();
+  }
+
   public updatePeriodTotal = (newTotal: string) => {
-    this.setState({ periodTotalAmount: parseInt(newTotal, 10) });
+    this.setState(
+      { periodTotalAmount: parseInt(newTotal, 10) },
+      this.storeData
+    );
   };
 
   public updatePeriodStart = (newStartDate: number) => {
-    this.setState({ periodStartDate: newStartDate });
+    this.setState({ periodStartDate: newStartDate }, this.storeData);
   };
 
   public updateDayAmountSpent = (amountSpent: number, date: number) => {
@@ -57,10 +64,13 @@ class BudgetCalculator extends Component<{}, State> {
         .map((k: string) => dailyAmountsSpent[k])
         .reduce((a, b) => a + b);
     }
-    this.setState({
-      dailyAmountsSpent,
-      periodTotalSpent
-    });
+    this.setState(
+      {
+        dailyAmountsSpent,
+        periodTotalSpent
+      },
+      this.storeData
+    );
   };
 
   public render() {
@@ -102,6 +112,30 @@ class BudgetCalculator extends Component<{}, State> {
       </SafeAreaView>
     );
   }
+
+  private storeData = async () => {
+    const today = new Date();
+    const data = this.state;
+    const jsonOfItem = await AsyncStorage.setItem(
+      `${today.getMonth()}`,
+      JSON.stringify(data)
+    );
+    return jsonOfItem;
+  };
+
+  private fetchData = async () => {
+    const today = new Date();
+    const savedData = await AsyncStorage.getItem(`${today.getMonth()}`);
+    if (savedData !== null) {
+      const data = JSON.parse(savedData);
+      this.setState({
+        dailyAmountsSpent: data.dailyAmountsSpent,
+        periodTotalAmount: data.periodTotalAmount,
+        periodTotalSpent: data.periodTotalSpent,
+        periodStartDate: data.periodStartDate
+      });
+    }
+  };
 }
 
 export default BudgetCalculator;
