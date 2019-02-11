@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { AsyncStorage } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 
 import {
@@ -14,7 +15,6 @@ import RemainderCalculations from "./RemainderCalculations";
 
 interface State {
   dailyAmountsSpent: any;
-  // dailyAmountsSpent: { [key: string]: number };
   periodTotalAmount: number;
   periodTotalSpent: number;
   periodStartDate: number;
@@ -34,12 +34,20 @@ class BudgetCalculator extends Component<{}, State> {
     this.updatePeriodStart.bind(this);
   }
 
+  public componentWillMount() {
+    this.fetchData();
+    this.handlePreviousMonths();
+  }
+
   public updatePeriodTotal = (newTotal: string) => {
-    this.setState({ periodTotalAmount: parseInt(newTotal, 10) });
+    this.setState(
+      { periodTotalAmount: parseInt(newTotal, 10) },
+      this.storeData
+    );
   };
 
   public updatePeriodStart = (newStartDate: number) => {
-    this.setState({ periodStartDate: newStartDate });
+    this.setState({ periodStartDate: newStartDate }, this.storeData);
   };
 
   public updateDayAmountSpent = (amountSpent: number, date: number) => {
@@ -57,10 +65,13 @@ class BudgetCalculator extends Component<{}, State> {
         .map((k: string) => dailyAmountsSpent[k])
         .reduce((a, b) => a + b);
     }
-    this.setState({
-      dailyAmountsSpent,
-      periodTotalSpent
-    });
+    this.setState(
+      {
+        dailyAmountsSpent,
+        periodTotalSpent
+      },
+      this.storeData
+    );
   };
 
   public render() {
@@ -71,20 +82,24 @@ class BudgetCalculator extends Component<{}, State> {
       periodStartMonth
     ).length;
     const daysRemaining = daysInStartMonth - daysElapsed;
-    const dailyAllowance =
-      Math.floor(this.state.periodTotalAmount / daysInStartMonth) / 100;
+    const dailyAllowance = Math.floor(
+      this.state.periodTotalAmount / daysInStartMonth
+    );
     return (
       <SafeAreaView
         forceInset={{ top: "always", bottom: "always" }}
-        style={{ flex: 1 }}
+        style={{
+          flex: 1,
+          marginHorizontal: "5%"
+        }}
       >
-        <DateSelection
-          intervalStartDate={this.state.periodStartDate}
-          updateIntervalStartDate={this.updatePeriodStart}
-        />
         <PeriodAllowanceInput
           allowanceAmount={this.state.periodTotalAmount}
           updateAllowance={this.updatePeriodTotal}
+        />
+        <DateSelection
+          intervalStartDate={this.state.periodStartDate}
+          updateIntervalStartDate={this.updatePeriodStart}
         />
         <RemainderCalculations
           dailyAllowance={dailyAllowance}
@@ -94,7 +109,6 @@ class BudgetCalculator extends Component<{}, State> {
           totalSpent={this.state.periodTotalSpent}
         />
         <DayInputs
-          dailyAllowance={dailyAllowance}
           startNumber={this.state.periodStartDate}
           updateAmountSpent={this.updateDayAmountSpent}
           amountsSpent={this.state.dailyAmountsSpent}
@@ -102,6 +116,50 @@ class BudgetCalculator extends Component<{}, State> {
       </SafeAreaView>
     );
   }
+
+  private handlePreviousMonths = async () => {
+    const newDate = new Date();
+    newDate.setMonth(newDate.getMonth(), -1);
+    const lastMonthsData = await AsyncStorage.getItem(`${newDate.getMonth()}`);
+    if (lastMonthsData !== null) {
+      const data = JSON.parse(lastMonthsData);
+      if (data.periodTotalAmount && data.periodTotalSpent) {
+        await AsyncStorage.setItem(
+          `${newDate.getMonth()}`,
+          (data.periodTotalAmount - data.periodTotalSpent).toString()
+        );
+      }
+    }
+    newDate.setMonth(newDate.getMonth(), -1);
+    const monthBeforeThat = await AsyncStorage.getItem(`${newDate.getMonth()}`);
+    if (monthBeforeThat !== null) {
+      await AsyncStorage.removeItem(`${newDate.getMonth()}`);
+    }
+  };
+
+  private storeData = async () => {
+    const today = new Date();
+    const data = this.state;
+    const jsonOfItem = await AsyncStorage.setItem(
+      `${today.getMonth()}`,
+      JSON.stringify(data)
+    );
+    return jsonOfItem;
+  };
+
+  private fetchData = async () => {
+    const today = new Date();
+    const savedData = await AsyncStorage.getItem(`${today.getMonth()}`);
+    if (savedData !== null) {
+      const data = JSON.parse(savedData);
+      this.setState({
+        dailyAmountsSpent: data.dailyAmountsSpent,
+        periodTotalAmount: data.periodTotalAmount,
+        periodTotalSpent: data.periodTotalSpent,
+        periodStartDate: data.periodStartDate
+      });
+    }
+  };
 }
 
 export default BudgetCalculator;
