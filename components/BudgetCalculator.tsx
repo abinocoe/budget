@@ -82,8 +82,9 @@ class BudgetCalculator extends Component<{}, State> {
       periodStartMonth
     ).length;
     const daysRemaining = daysInStartMonth - daysElapsed;
-    const dailyAllowance =
-      Math.floor(this.state.periodTotalAmount / daysInStartMonth) / 100;
+    const dailyAllowance = Math.floor(
+      this.state.periodTotalAmount / daysInStartMonth
+    );
     return (
       <SafeAreaView
         forceInset={{ top: "always", bottom: "always" }}
@@ -105,7 +106,6 @@ class BudgetCalculator extends Component<{}, State> {
           totalSpent={this.state.periodTotalSpent}
         />
         <DayInputs
-          dailyAllowance={dailyAllowance}
           startNumber={this.state.periodStartDate}
           updateAmountSpent={this.updateDayAmountSpent}
           amountsSpent={this.state.dailyAmountsSpent}
