@@ -21,7 +21,10 @@ const RemainderCalculations = ({
   return (
     <View>
       <View style={styles.row}>
-        <Text>{`Total Remaining: ${decimalise(amountRemaining)}`}</Text>
+        <Text>{`Daily allowance: ${decimalise(dailyAllowance)}`}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text>{`Total remaining: ${decimalise(amountRemaining)}`}</Text>
       </View>
       <View style={styles.row}>
         <Text>
