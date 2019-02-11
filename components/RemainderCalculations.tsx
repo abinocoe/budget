@@ -18,23 +18,28 @@ const RemainderCalculations = ({
 }: Props) => {
   const amountRemaining = totalAllowance - totalSpent;
   const decimalise = (amount: number) => (amount / 100).toFixed(2).toString();
+  const creditOrDebitAmount = dailyAllowance * daysElapsed - totalSpent;
   return (
     <View>
       <View style={styles.row}>
-        <Text>{`Daily allowance: ${decimalise(dailyAllowance)}`}</Text>
+        <Text style={styles.text}>{`Daily allowance: ${decimalise(
+          dailyAllowance
+        )}`}</Text>
       </View>
       <View style={styles.row}>
-        <Text>{`Total remaining: ${decimalise(amountRemaining)}`}</Text>
+        <Text style={styles.text}>{`Total remaining: ${decimalise(
+          amountRemaining
+        )}`}</Text>
       </View>
       <View style={styles.row}>
-        <Text>
-          {`Amount credit: ${decimalise(
-            dailyAllowance * daysElapsed - totalSpent
-          )}`}
+        <Text style={styles.text}>
+          {creditOrDebitAmount >= 0
+            ? `Amount credit: ${decimalise(creditOrDebitAmount)}`
+            : `Amount debit: ${decimalise(creditOrDebitAmount)}`}
         </Text>
       </View>
       <View style={styles.row}>
-        <Text>
+        <Text style={styles.text}>
           {`Average per day remain: ${decimalise(
             amountRemaining / daysRemaining
           )}`}
@@ -47,6 +52,10 @@ const RemainderCalculations = ({
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row"
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: "bold"
   }
 });
 

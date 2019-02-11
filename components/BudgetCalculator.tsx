@@ -88,15 +88,18 @@ class BudgetCalculator extends Component<{}, State> {
     return (
       <SafeAreaView
         forceInset={{ top: "always", bottom: "always" }}
-        style={{ flex: 1 }}
+        style={{
+          flex: 1,
+          marginHorizontal: "5%"
+        }}
       >
-        <DateSelection
-          intervalStartDate={this.state.periodStartDate}
-          updateIntervalStartDate={this.updatePeriodStart}
-        />
         <PeriodAllowanceInput
           allowanceAmount={this.state.periodTotalAmount}
           updateAllowance={this.updatePeriodTotal}
+        />
+        <DateSelection
+          intervalStartDate={this.state.periodStartDate}
+          updateIntervalStartDate={this.updatePeriodStart}
         />
         <RemainderCalculations
           dailyAllowance={dailyAllowance}

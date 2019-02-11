@@ -23,7 +23,7 @@ const DayInputsContainer = ({
   ).reverse();
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView style={{ width: "100%" }}>
+      <ScrollView style={{ flex: 1, marginVertical: 30 }}>
         {days.map(date => (
           <Day
             amountSpent={amountsSpent[date]}

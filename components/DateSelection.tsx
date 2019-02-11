@@ -19,29 +19,25 @@ class DateSelection extends Component<Props, State> {
   };
 
   public render() {
-    return this.state.showPicker ? (
-      <View>
-        <TouchableOpacity
-          onPress={() => this.setState({ showPicker: !this.state.showPicker })}
-        >
-          <Text>X</Text>
-        </TouchableOpacity>
-        <Picker
-          selectedValue={this.props.intervalStartDate}
-          onValueChange={itemValue =>
-            this.props.updateIntervalStartDate(itemValue)
-          }
-        >
-          {DAYSOFMONTH.map(date => (
-            <Picker.Item label={date.toString()} value={date} key={date} />
-          ))}
-        </Picker>
-      </View>
-    ) : (
+    return (
       <TouchableOpacity
         onPress={() => this.setState({ showPicker: !this.state.showPicker })}
       >
-        <Text>{this.props.intervalStartDate}</Text>
+        <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+          Period start date: {this.props.intervalStartDate}
+        </Text>
+        {this.state.showPicker && (
+          <Picker
+            selectedValue={this.props.intervalStartDate}
+            onValueChange={itemValue =>
+              this.props.updateIntervalStartDate(itemValue)
+            }
+          >
+            {DAYSOFMONTH.map(date => (
+              <Picker.Item label={date.toString()} value={date} key={date} />
+            ))}
+          </Picker>
+        )}
       </TouchableOpacity>
     );
   }
