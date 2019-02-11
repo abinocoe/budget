@@ -1,6 +1,6 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import { Picker, Text, TouchableOpacity, View } from "react-native";
+import { Picker, Text, TouchableOpacity } from "react-native";
 
 const DAYSOFMONTH = _.range(1, 32);
 
