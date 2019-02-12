@@ -106,7 +106,8 @@ def getPassword(String currentUser, String keyChain) {
       stdout.toString().trim()
 }
 
-def pass = getPassword("abigail coe","android_keystore")
+def pass = getPassword("abigailcoe","android_keystore")
+def storePass = getPassword("abigailcoe","google_play")
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -125,7 +126,7 @@ android {
     signingConfigs {
         release {
             storeFile file(MYAPP_RELEASE_STORE_FILE)
-            storePassword pass
+            storePassword storePass
             keyAlias MYAPP_RELEASE_KEY_ALIAS
             keyPassword pass
         }
