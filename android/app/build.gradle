@@ -106,15 +106,15 @@ def getPassword(String currentUser, String keyChain) {
       stdout.toString().trim()
 }
 
-def pass = getPassword("abigailcoe","android_keystore")
-def storePass = getPassword("abigailcoe","google_play")
+def storePass = getPassword("abigailcoe","android_keystore")
+def keyPass = getPassword("abigailcoe","android_key_pass")
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.budget"
+        applicationId "com.abinocoe.budget"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -128,7 +128,7 @@ android {
             storeFile file(MYAPP_RELEASE_STORE_FILE)
             storePassword storePass
             keyAlias MYAPP_RELEASE_KEY_ALIAS
-            keyPassword pass
+            keyPassword keyPass
         }
     }
     splits {
