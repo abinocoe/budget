@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet } from "react-native";
+import { ListItem } from "react-native-elements";
+
+import { getFriendlyDate } from "../lib/date";
 
 interface Props {
   amountSpent: number;
@@ -10,31 +13,21 @@ interface Props {
 class Day extends Component<Props> {
   public render() {
     return (
-      <View
-        style={{
-          paddingVertical: 5,
-          alignItems: "center",
-          height: 55,
-          flexDirection: "row"
-        }}
-        key={this.props.date}
-      >
-        <Text style={[styles.text, styles.date]}>{this.props.date}</Text>
-        <TextInput
-          keyboardType="number-pad"
-          onChangeText={(text: any) => {
+      <ListItem
+        title={getFriendlyDate(this.props.date)}
+        input={{
+          keyboardType: "number-pad",
+          onChangeText: (text: any) => {
             if (!isNaN(text)) {
               this.props.updateAmountSpent(parseInt(text, 10), this.props.date);
             }
-          }}
-          style={[styles.input, styles.text]}
-          value={
-            isNaN(this.props.amountSpent)
-              ? ""
-              : this.props.amountSpent.toString()
-          }
-        />
-      </View>
+          },
+          containerStyle: styles.input,
+          value: isNaN(this.props.amountSpent)
+            ? ""
+            : this.props.amountSpent.toString()
+        }}
+      />
     );
   }
 }
@@ -49,8 +42,6 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "pink",
-    width: 60,
-    marginHorizontal: 4,
     borderRadius: 2
   }
 });
