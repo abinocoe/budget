@@ -3,6 +3,8 @@ import _ from "lodash";
 const today = new Date();
 const dateToday = today.getDate();
 
+const dayStrings = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
 export const numberOfDaysInStartMonth = (startMonth: number) =>
   32 -
   new Date(
@@ -34,4 +36,29 @@ export const getPeriodStartMonth = (startDate: number) => {
     : thisMonth === 0
     ? 11
     : thisMonth - 1;
+};
+
+export const getFriendlyDate = (day: number) => {
+  const mutableDate = new Date();
+  if (day > dateToday) {
+    mutableDate.setDate(day);
+    mutableDate.setMonth(today.getMonth() - 1);
+  } else {
+    mutableDate.setDate(day);
+  }
+  return `${dayStrings[mutableDate.getDay()]} ${day}${getOrdinal(day)}`;
+};
+
+const getOrdinal = (day: number) => {
+  if (day > 3 && day < 21) return "th";
+  switch (day % 10) {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
 };
