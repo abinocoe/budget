@@ -80,13 +80,15 @@ class Day extends Component<Props, State> {
               this.setState({ value: "", rawValue: "" });
             }
           },
-          placeholder: (this.props.amountSpent / 100).toFixed(2),
+          placeholder: this.props.amountSpent
+            ? (this.props.amountSpent / 100).toFixed(2)
+            : "0.00",
           value: this.state.value
         }}
         rightElement={
           <Button
             buttonStyle={{
-              backgroundColor: this.state.editable ? "#8FCB9B" : "#DD2D4A"
+              backgroundColor: this.state.editable ? "#8FCB9B" : "#E36588"
             }}
             icon={
               this.state.editable ? (
@@ -113,7 +115,8 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#FFC0CB",
-    borderRadius: 2
+    borderRadius: 2,
+    paddingRight: 5
   }
 });
 
