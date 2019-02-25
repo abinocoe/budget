@@ -80,7 +80,9 @@ class Day extends Component<Props, State> {
               this.setState({ value: "", rawValue: "" });
             }
           },
-          placeholder: (this.props.amountSpent / 100).toFixed(2),
+          placeholder: this.props.amountSpent
+            ? (this.props.amountSpent / 100).toFixed(2)
+            : "0.00",
           value: this.state.value
         }}
         rightElement={
