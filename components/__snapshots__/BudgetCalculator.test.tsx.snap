@@ -21,6 +21,7 @@ ShallowWrapper {
       "children": Array [
         <PeriodAllowanceInput
           allowanceAmount={50000}
+          periodMainMonth={2}
           updateAllowance={[Function]}
         />,
         <DateSelection
@@ -28,9 +29,9 @@ ShallowWrapper {
           updateIntervalStartDate={[Function]}
         />,
         <RemainderCalculations
-          dailyAllowance={1612}
-          daysElapsed={26}
-          daysRemaining={5}
+          dailyAllowance={1785}
+          daysElapsed={1}
+          daysRemaining={28}
           totalAllowance={50000}
           totalSpent={0}
         />,
@@ -57,6 +58,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "allowanceAmount": 50000,
+          "periodMainMonth": 2,
           "updateAllowance": [Function],
         },
         "ref": null,
@@ -80,9 +82,9 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "dailyAllowance": 1612,
-          "daysElapsed": 26,
-          "daysRemaining": 5,
+          "dailyAllowance": 1785,
+          "daysElapsed": 1,
+          "daysRemaining": 28,
           "totalAllowance": 50000,
           "totalSpent": 0,
         },
@@ -115,6 +117,7 @@ ShallowWrapper {
         "children": Array [
           <PeriodAllowanceInput
             allowanceAmount={50000}
+            periodMainMonth={2}
             updateAllowance={[Function]}
           />,
           <DateSelection
@@ -122,9 +125,9 @@ ShallowWrapper {
             updateIntervalStartDate={[Function]}
           />,
           <RemainderCalculations
-            dailyAllowance={1612}
-            daysElapsed={26}
-            daysRemaining={5}
+            dailyAllowance={1785}
+            daysElapsed={1}
+            daysRemaining={28}
             totalAllowance={50000}
             totalSpent={0}
           />,
@@ -151,6 +154,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "allowanceAmount": 50000,
+            "periodMainMonth": 2,
             "updateAllowance": [Function],
           },
           "ref": null,
@@ -174,9 +178,9 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "dailyAllowance": 1612,
-            "daysElapsed": 26,
-            "daysRemaining": 5,
+            "dailyAllowance": 1785,
+            "daysElapsed": 1,
+            "daysRemaining": 28,
             "totalAllowance": 50000,
             "totalSpent": 0,
           },
