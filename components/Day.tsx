@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import { ListItem } from "react-native-elements";
+import { Button, Icon, ListItem } from "react-native-elements";
 
 import { getFriendlyDate } from "../lib/date";
 
@@ -10,7 +10,21 @@ interface Props {
   updateAmountSpent: (amount: number, day: number) => void;
 }
 
-class Day extends Component<Props> {
+interface State {
+  editable: boolean;
+}
+class Day extends Component<Props, State> {
+  public constructor(props: Props) {
+    super(props);
+    this.state = {
+      editable: false
+    };
+    this.handleButtonPress.bind(this);
+  }
+
+  public handleButtonPress = () =>
+    this.setState({ editable: !this.state.editable });
+
   public render() {
     return (
       <ListItem
@@ -25,8 +39,32 @@ class Day extends Component<Props> {
           containerStyle: styles.input,
           value: isNaN(this.props.amountSpent)
             ? ""
-            : this.props.amountSpent.toString()
+            : this.props.amountSpent.toString(),
+          editable: this.state.editable
         }}
+        rightElement={
+          <Button
+            buttonStyle={{
+              backgroundColor: this.state.editable ? "green" : "red"
+            }}
+            icon={
+              this.state.editable ? (
+                <Icon
+                  reverseColor="green"
+                  underlayColor="green"
+                  iconStyle={{ backgroundColor: "green" }}
+                  containerStyle={{ backgroundColor: "green" }}
+                  name="check"
+                  size={15}
+                  color="white"
+                />
+              ) : (
+                <Icon name="clear" size={15} color="white" />
+              )
+            }
+            onPress={this.handleButtonPress}
+          />
+        }
       />
     );
   }
