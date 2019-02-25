@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import { AsyncStorage } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
@@ -47,6 +48,20 @@ class BudgetCalculator extends Component<{}, State> {
   };
 
   public updatePeriodStart = (newStartDate: number) => {
+    if (newStartDate > this.state.periodStartDate) {
+      _.range(this.state.periodStartDate, newStartDate).map(date => {
+        delete this.state.dailyAmountsSpent[date];
+      });
+    } else if (newStartDate < this.state.periodStartDate) {
+      _.range(
+        this.state.periodStartDate,
+        numberOfDaysInStartMonth(getPeriodStartMonth(newStartDate)) + 1
+      )
+        .concat(newStartDate === 1 ? [1] : _.range(1, newStartDate))
+        .map(date => {
+          delete this.state.dailyAmountsSpent[date];
+        });
+    }
     this.setState({ periodStartDate: newStartDate }, this.storeData);
   };
 
