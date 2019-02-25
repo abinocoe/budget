@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 
 interface Props {
   allowanceAmount: number;
+  periodMainMonth: number;
   updateAllowance: (amount: string) => void;
 }
 
@@ -23,22 +24,19 @@ const monthStrings: { [key: number]: string } = {
 
 class PeriodAllowanceInput extends Component<Props> {
   public render() {
-    const date = new Date();
-    const month = date.getMonth();
+    const { periodMainMonth, updateAllowance, allowanceAmount } = this.props;
     return (
       <View style={{ flexDirection: "row", alignItems: "center", height: 50 }}>
-        <Text style={styles.text}>Total amount {monthStrings[month]}: </Text>
+        <Text style={styles.text}>
+          {`Total amount ${monthStrings[periodMainMonth]}: `}
+        </Text>
         <TextInput
           style={[styles.text, { width: 70 }]}
           keyboardType="number-pad"
           onChangeText={(text: any) => {
-            this.props.updateAllowance(text);
+            updateAllowance(text);
           }}
-          value={
-            isNaN(this.props.allowanceAmount)
-              ? ""
-              : this.props.allowanceAmount.toString()
-          }
+          value={isNaN(allowanceAmount) ? "" : allowanceAmount.toString()}
         />
       </View>
     );

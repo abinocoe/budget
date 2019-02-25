@@ -81,7 +81,7 @@ class BudgetCalculator extends Component<{}, State> {
       this.state.periodStartDate,
       periodStartMonth
     ).length;
-    const daysRemaining = daysInStartMonth - daysElapsed;
+    const daysRemaining = daysInStartMonth - daysElapsed + 1;
     const dailyAllowance = Math.floor(
       this.state.periodTotalAmount / daysInStartMonth
     );
@@ -95,6 +95,7 @@ class BudgetCalculator extends Component<{}, State> {
       >
         <PeriodAllowanceInput
           allowanceAmount={this.state.periodTotalAmount}
+          periodMainMonth={periodStartMonth + 1}
           updateAllowance={this.updatePeriodTotal}
         />
         <DateSelection
