@@ -54,8 +54,8 @@ class BudgetCalculator extends Component<{}, State> {
       });
     } else if (newStartDate < this.state.periodStartDate) {
       _.range(
-        this.state.periodStartDate,
-        numberOfDaysInStartMonth(getPeriodStartMonth(newStartDate)) + 1
+        this.state.periodStartDate + 1,
+        numberOfDaysInStartMonth(getPeriodStartMonth(newStartDate))
       )
         .concat(newStartDate === 1 ? [1] : _.range(1, newStartDate))
         .map(date => {
