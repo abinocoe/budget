@@ -90,9 +90,9 @@ class Day extends Component<Props, State> {
             }}
             icon={
               this.state.editable ? (
-                <Icon name="check" size={15} color="white" />
+                <Icon name="check" size={20} color="white" />
               ) : (
-                <Icon name="clear" size={15} color="white" />
+                <Icon name="clear" size={20} color="white" />
               )
             }
             onPress={this.handleButtonPress}
