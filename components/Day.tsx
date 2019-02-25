@@ -31,33 +31,26 @@ class Day extends Component<Props, State> {
         title={getFriendlyDate(this.props.date)}
         input={{
           keyboardType: "number-pad",
-          onChangeText: (text: any) => {
-            if (!isNaN(text)) {
-              this.props.updateAmountSpent(parseInt(text, 10), this.props.date);
+          onEndEditing: e => {
+            if (e.nativeEvent.text !== "" && !this.props.amountSpent) {
+              this.props.updateAmountSpent(
+                parseInt(e.nativeEvent.text, 10),
+                this.props.date
+              );
             }
           },
           containerStyle: styles.input,
-          value: isNaN(this.props.amountSpent)
-            ? ""
-            : this.props.amountSpent.toString(),
+          placeholder: (this.props.amountSpent / 100).toFixed(2),
           editable: this.state.editable
         }}
         rightElement={
           <Button
             buttonStyle={{
-              backgroundColor: this.state.editable ? "green" : "red"
+              backgroundColor: this.state.editable ? "#8FCB9B" : "#DD2D4A"
             }}
             icon={
               this.state.editable ? (
-                <Icon
-                  reverseColor="green"
-                  underlayColor="green"
-                  iconStyle={{ backgroundColor: "green" }}
-                  containerStyle={{ backgroundColor: "green" }}
-                  name="check"
-                  size={15}
-                  color="white"
-                />
+                <Icon name="check" size={15} color="white" />
               ) : (
                 <Icon name="clear" size={15} color="white" />
               )
@@ -79,7 +72,7 @@ const styles = StyleSheet.create({
     width: 20
   },
   input: {
-    backgroundColor: "pink",
+    backgroundColor: "#FFC0CB",
     borderRadius: 2
   }
 });
