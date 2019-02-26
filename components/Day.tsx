@@ -43,10 +43,10 @@ class Day extends Component<Props, State> {
       } else if (newRawValue.length === 2) {
         tmpAmount = `0.${newRawValue}`;
       } else {
-        const intAmount = newRawValue.slice(0, newRawValue.length - 2);
-        const pennyAmount = newRawValue.slice(-2);
-
-        tmpAmount = `${intAmount}.${pennyAmount}`;
+        tmpAmount = inputText
+          .replace(".", "")
+          .replace(/(\d{2})\b$/, ".$1")
+          .replace(/^0(\d.\d{2})/, "$1");
       }
 
       this.setState({
