@@ -30,8 +30,8 @@ ShallowWrapper {
         />,
         <RemainderCalculations
           dailyAllowance={1785}
-          daysElapsed={1}
-          daysRemaining={28}
+          daysElapsed={2}
+          daysRemaining={27}
           totalAllowance={50000}
           totalSpent={0}
         />,
@@ -83,8 +83,8 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "dailyAllowance": 1785,
-          "daysElapsed": 1,
-          "daysRemaining": 28,
+          "daysElapsed": 2,
+          "daysRemaining": 27,
           "totalAllowance": 50000,
           "totalSpent": 0,
         },
@@ -126,8 +126,8 @@ ShallowWrapper {
           />,
           <RemainderCalculations
             dailyAllowance={1785}
-            daysElapsed={1}
-            daysRemaining={28}
+            daysElapsed={2}
+            daysRemaining={27}
             totalAllowance={50000}
             totalSpent={0}
           />,
@@ -179,8 +179,8 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "dailyAllowance": 1785,
-            "daysElapsed": 1,
-            "daysRemaining": 28,
+            "daysElapsed": 2,
+            "daysRemaining": 27,
             "totalAllowance": 50000,
             "totalSpent": 0,
           },
