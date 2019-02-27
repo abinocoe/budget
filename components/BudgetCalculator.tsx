@@ -43,7 +43,7 @@ class BudgetCalculator extends Component<{}, State> {
   public updatePeriodTotal = (newTotal: string) => {
     this.setState(
       { periodTotalAmount: parseInt(newTotal, 10) },
-      this.storeData
+      this.storePeriodTotal
     );
   };
 
@@ -163,18 +163,32 @@ class BudgetCalculator extends Component<{}, State> {
     return jsonOfItem;
   };
 
+  private storePeriodTotal = async () => {
+    await AsyncStorage.setItem(
+      "periodTotalAmount",
+      this.state.periodTotalAmount.toString()
+    );
+  };
+
   private fetchData = async () => {
+    const newState = {};
     const today = new Date();
-    const savedData = await AsyncStorage.getItem(`${today.getMonth()}`);
-    if (savedData !== null) {
-      const data = JSON.parse(savedData);
-      this.setState({
-        dailyAmountsSpent: data.dailyAmountsSpent,
-        periodTotalAmount: data.periodTotalAmount,
-        periodTotalSpent: data.periodTotalSpent,
-        periodStartDate: data.periodStartDate
+    const dailyTotals = await AsyncStorage.getItem(`${today.getMonth()}`);
+    if (dailyTotals !== null) {
+      const dailyData = JSON.parse(dailyTotals);
+      Object.assign(newState, {
+        dailyAmountsSpent: dailyData.dailyAmountsSpent,
+        periodTotalSpent: dailyData.periodTotalSpent,
+        periodStartDate: dailyData.periodStartDate
       });
     }
+    const periodTotalAmount = await AsyncStorage.getItem("periodTotalAmount");
+    if (periodTotalAmount !== null) {
+      Object.assign(newState, {
+        periodTotalAmount
+      });
+    }
+    this.setState(newState);
   };
 }
 
