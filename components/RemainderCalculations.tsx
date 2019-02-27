@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
     width: "90%",
     textAlign: "center",
     backgroundColor: colours.mauve,
-    color: "white"
+    color: "white",
+    elevation: 3
   },
   smallText: {
     fontSize: 12

@@ -91,7 +91,8 @@ class Day extends Component<Props, State> {
             buttonStyle={{
               backgroundColor: this.state.editable
                 ? colours.mauve
-                : colours.lightPink
+                : colours.lightPink,
+              elevation: 3
             }}
             icon={
               this.state.editable ? (

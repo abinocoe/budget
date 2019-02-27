@@ -69,7 +69,8 @@ class PeriodAllowanceInput extends Component<Props> {
                 backgroundColor: colours.mauve,
                 width: "90%",
                 textAlign: "center",
-                color: "white"
+                color: "white",
+                elevation: 3
               }}
             >
               {isNaN(allowanceAmount) ? "" : (allowanceAmount / 100).toFixed(2)}

@@ -36,7 +36,8 @@ class DateSelection extends Component<Props, State> {
               width: "90%",
               backgroundColor: colours.mauve,
               textAlign: "center",
-              color: "white"
+              color: "white",
+              elevation: 3
             }}
           >
             {this.props.intervalStartDate}
