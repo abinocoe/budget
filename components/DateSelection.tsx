@@ -1,6 +1,8 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import { Picker, Text, TouchableOpacity } from "react-native";
+import { Picker, Text, TouchableOpacity, View } from "react-native";
+
+import * as colours from "../constants/colours";
 
 const DAYSOFMONTH = _.range(1, 32);
 
@@ -23,9 +25,25 @@ class DateSelection extends Component<Props, State> {
       <TouchableOpacity
         onPress={() => this.setState({ showPicker: !this.state.showPicker })}
       >
-        <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-          Period start date: {this.props.intervalStartDate}
-        </Text>
+        <View style={{ alignItems: "center" }}>
+          <Text
+            style={{
+              fontSize: 30,
+              paddingHorizontal: 5,
+              marginTop: 10,
+              marginBottom: 5,
+              borderRadius: 5,
+              width: "90%",
+              backgroundColor: colours.mauve,
+              textAlign: "center",
+              color: "white",
+              elevation: 3
+            }}
+          >
+            {this.props.intervalStartDate}
+          </Text>
+          <Text style={{ fontSize: 12 }}>Period start date</Text>
+        </View>
         {this.state.showPicker && (
           <Picker
             selectedValue={this.props.intervalStartDate}

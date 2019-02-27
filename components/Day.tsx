@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { Button, Icon, ListItem } from "react-native-elements";
 
+import * as colours from "../constants/colours";
 import { getFriendlyDate } from "../lib/date";
 
 interface Props {
@@ -43,10 +44,10 @@ class Day extends Component<Props, State> {
       } else if (newRawValue.length === 2) {
         tmpAmount = `0.${newRawValue}`;
       } else {
-        const intAmount = newRawValue.slice(0, newRawValue.length - 2);
-        const pennyAmount = newRawValue.slice(-2);
-
-        tmpAmount = `${intAmount}.${pennyAmount}`;
+        tmpAmount = inputText
+          .replace(".", "")
+          .replace(/(\d{2})\b$/, ".$1")
+          .replace(/^0(\d.\d{2})/, "$1");
       }
 
       this.setState({
@@ -88,7 +89,10 @@ class Day extends Component<Props, State> {
         rightElement={
           <Button
             buttonStyle={{
-              backgroundColor: this.state.editable ? "#8FCB9B" : "#E36588"
+              backgroundColor: this.state.editable
+                ? colours.mauve
+                : colours.lightPink,
+              elevation: 3
             }}
             icon={
               this.state.editable ? (
@@ -114,7 +118,7 @@ const styles = StyleSheet.create({
     width: 20
   },
   input: {
-    backgroundColor: "#FFC0CB",
+    backgroundColor: colours.lightPink,
     borderRadius: 2,
     paddingRight: 5
   }

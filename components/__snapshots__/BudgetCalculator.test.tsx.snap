@@ -19,21 +19,15 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <PeriodAllowanceInput
-          allowanceAmount={50000}
-          periodMainMonth={2}
-          updateAllowance={[Function]}
-        />,
-        <DateSelection
-          intervalStartDate={25}
-          updateIntervalStartDate={[Function]}
-        />,
         <RemainderCalculations
           dailyAllowance={1785}
-          daysElapsed={1}
-          daysRemaining={28}
+          daysElapsed={3}
+          daysRemaining={26}
+          intervalStartDate={25}
           totalAllowance={50000}
           totalSpent={0}
+          updateAllowance={[Function]}
+          updateIntervalStartDate={[Function]}
         />,
         <DayInputsContainer
           amountsSpent={Object {}}
@@ -55,38 +49,16 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "allowanceAmount": 50000,
-          "periodMainMonth": 2,
-          "updateAllowance": [Function],
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "intervalStartDate": 25,
-          "updateIntervalStartDate": [Function],
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
         "nodeType": "function",
         "props": Object {
           "dailyAllowance": 1785,
-          "daysElapsed": 1,
-          "daysRemaining": 28,
+          "daysElapsed": 3,
+          "daysRemaining": 26,
+          "intervalStartDate": 25,
           "totalAllowance": 50000,
           "totalSpent": 0,
+          "updateAllowance": [Function],
+          "updateIntervalStartDate": [Function],
         },
         "ref": null,
         "rendered": null,
@@ -115,21 +87,15 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <PeriodAllowanceInput
-            allowanceAmount={50000}
-            periodMainMonth={2}
-            updateAllowance={[Function]}
-          />,
-          <DateSelection
-            intervalStartDate={25}
-            updateIntervalStartDate={[Function]}
-          />,
           <RemainderCalculations
             dailyAllowance={1785}
-            daysElapsed={1}
-            daysRemaining={28}
+            daysElapsed={3}
+            daysRemaining={26}
+            intervalStartDate={25}
             totalAllowance={50000}
             totalSpent={0}
+            updateAllowance={[Function]}
+            updateIntervalStartDate={[Function]}
           />,
           <DayInputsContainer
             amountsSpent={Object {}}
@@ -151,38 +117,16 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "allowanceAmount": 50000,
-            "periodMainMonth": 2,
-            "updateAllowance": [Function],
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "intervalStartDate": 25,
-            "updateIntervalStartDate": [Function],
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
           "nodeType": "function",
           "props": Object {
             "dailyAllowance": 1785,
-            "daysElapsed": 1,
-            "daysRemaining": 28,
+            "daysElapsed": 3,
+            "daysRemaining": 26,
+            "intervalStartDate": 25,
             "totalAllowance": 50000,
             "totalSpent": 0,
+            "updateAllowance": [Function],
+            "updateIntervalStartDate": [Function],
           },
           "ref": null,
           "rendered": null,

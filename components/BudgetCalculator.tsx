@@ -9,9 +9,7 @@ import {
   numberOfDaysInStartMonth
 } from "../lib/date";
 
-import DateSelection from "./DateSelection";
 import DayInputs from "./DayInputsContainer";
-import PeriodAllowanceInput from "./PeriodAllowance";
 import RemainderCalculations from "./RemainderCalculations";
 
 interface State {
@@ -40,11 +38,8 @@ class BudgetCalculator extends Component<{}, State> {
     this.handlePreviousMonths();
   }
 
-  public updatePeriodTotal = (newTotal: string) => {
-    this.setState(
-      { periodTotalAmount: parseInt(newTotal, 10) },
-      this.storeData
-    );
+  public updatePeriodTotal = (newTotal: number) => {
+    this.setState({ periodTotalAmount: newTotal }, this.storePeriodTotal);
   };
 
   public updatePeriodStart = (newStartDate: number) => {
@@ -62,7 +57,7 @@ class BudgetCalculator extends Component<{}, State> {
           delete this.state.dailyAmountsSpent[date];
         });
     }
-    this.setState({ periodStartDate: newStartDate }, this.storeData);
+    this.setState({ periodStartDate: newStartDate }, this.storeDateSelection);
   };
 
   public updateDayAmountSpent = (amountSpent: number, date: number) => {
@@ -108,21 +103,15 @@ class BudgetCalculator extends Component<{}, State> {
           marginHorizontal: "5%"
         }}
       >
-        <PeriodAllowanceInput
-          allowanceAmount={this.state.periodTotalAmount}
-          periodMainMonth={periodStartMonth + 1}
-          updateAllowance={this.updatePeriodTotal}
-        />
-        <DateSelection
-          intervalStartDate={this.state.periodStartDate}
-          updateIntervalStartDate={this.updatePeriodStart}
-        />
         <RemainderCalculations
           dailyAllowance={dailyAllowance}
           daysElapsed={daysElapsed}
           daysRemaining={daysRemaining}
+          intervalStartDate={this.state.periodStartDate}
           totalAllowance={this.state.periodTotalAmount}
           totalSpent={this.state.periodTotalSpent}
+          updateAllowance={this.updatePeriodTotal}
+          updateIntervalStartDate={this.updatePeriodStart}
         />
         <DayInputs
           startNumber={this.state.periodStartDate}
@@ -163,18 +152,45 @@ class BudgetCalculator extends Component<{}, State> {
     return jsonOfItem;
   };
 
+  private storePeriodTotal = async () => {
+    await AsyncStorage.setItem(
+      "periodTotalAmount",
+      this.state.periodTotalAmount.toString()
+    );
+  };
+
+  private storeDateSelection = async () => {
+    await AsyncStorage.setItem(
+      "periodStartDate",
+      this.state.periodStartDate.toString()
+    );
+  };
+
   private fetchData = async () => {
+    const newState = {};
     const today = new Date();
-    const savedData = await AsyncStorage.getItem(`${today.getMonth()}`);
-    if (savedData !== null) {
-      const data = JSON.parse(savedData);
-      this.setState({
-        dailyAmountsSpent: data.dailyAmountsSpent,
-        periodTotalAmount: data.periodTotalAmount,
-        periodTotalSpent: data.periodTotalSpent,
-        periodStartDate: data.periodStartDate
+    const dailyTotals = await AsyncStorage.getItem(`${today.getMonth()}`);
+    if (dailyTotals !== null) {
+      const dailyData = JSON.parse(dailyTotals);
+      Object.assign(newState, {
+        dailyAmountsSpent: dailyData.dailyAmountsSpent,
+        periodTotalSpent: dailyData.periodTotalSpent,
+        periodStartDate: dailyData.periodStartDate
       });
     }
+    const periodTotalAmount = await AsyncStorage.getItem("periodTotalAmount");
+    if (periodTotalAmount !== null) {
+      Object.assign(newState, {
+        periodTotalAmount
+      });
+    }
+    const periodStartDate = await AsyncStorage.getItem("periodStartDate");
+    if (periodStartDate !== null) {
+      Object.assign(newState, {
+        periodStartDate
+      });
+    }
+    this.setState(newState);
   };
 }
 
