@@ -9,9 +9,7 @@ import {
   numberOfDaysInStartMonth
 } from "../lib/date";
 
-import DateSelection from "./DateSelection";
 import DayInputs from "./DayInputsContainer";
-import PeriodAllowanceInput from "./PeriodAllowance";
 import RemainderCalculations from "./RemainderCalculations";
 
 interface State {
@@ -105,21 +103,15 @@ class BudgetCalculator extends Component<{}, State> {
           marginHorizontal: "5%"
         }}
       >
-        <PeriodAllowanceInput
-          allowanceAmount={this.state.periodTotalAmount}
-          periodMainMonth={periodStartMonth + 1}
-          updateAllowance={this.updatePeriodTotal}
-        />
-        <DateSelection
-          intervalStartDate={this.state.periodStartDate}
-          updateIntervalStartDate={this.updatePeriodStart}
-        />
         <RemainderCalculations
           dailyAllowance={dailyAllowance}
           daysElapsed={daysElapsed}
           daysRemaining={daysRemaining}
+          intervalStartDate={this.state.periodStartDate}
           totalAllowance={this.state.periodTotalAmount}
           totalSpent={this.state.periodTotalSpent}
+          updateAllowance={this.updatePeriodTotal}
+          updateIntervalStartDate={this.updatePeriodStart}
         />
         <DayInputs
           startNumber={this.state.periodStartDate}

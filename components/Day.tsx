@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { Button, Icon, ListItem } from "react-native-elements";
 
+import * as colours from "../constants/colours";
 import { getFriendlyDate } from "../lib/date";
 
 interface Props {
@@ -88,7 +89,9 @@ class Day extends Component<Props, State> {
         rightElement={
           <Button
             buttonStyle={{
-              backgroundColor: this.state.editable ? "#8FCB9B" : "#E36588"
+              backgroundColor: this.state.editable
+                ? colours.mauve
+                : colours.lightPink
             }}
             icon={
               this.state.editable ? (
@@ -114,7 +117,7 @@ const styles = StyleSheet.create({
     width: 20
   },
   input: {
-    backgroundColor: "#FFC0CB",
+    backgroundColor: colours.lightPink,
     borderRadius: 2,
     paddingRight: 5
   }

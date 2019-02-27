@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Input } from "react-native-elements";
 
+import * as colours from "../constants/colours";
+
 interface Props {
   allowanceAmount: number;
-  periodMainMonth: number;
   updateAllowance: (amount: number) => void;
 }
 
@@ -13,21 +14,6 @@ interface State {
   value: string;
   rawValue: string;
 }
-
-const monthStrings: { [key: number]: string } = {
-  0: "January",
-  1: "February",
-  2: "March",
-  3: "April",
-  4: "May",
-  5: "June",
-  6: "July",
-  7: "August",
-  8: "September",
-  9: "October",
-  10: "November",
-  11: "December"
-};
 
 class PeriodAllowanceInput extends Component<Props> {
   public state: Readonly<State> = {
@@ -66,21 +52,37 @@ class PeriodAllowanceInput extends Component<Props> {
   }
 
   public render() {
-    const { periodMainMonth, updateAllowance, allowanceAmount } = this.props;
+    const { updateAllowance, allowanceAmount } = this.props;
     return (
       <View>
         <TouchableOpacity
           onPress={() => this.setState({ showInput: !this.state.showInput })}
         >
-          <Text style={styles.text}>
-            {`Total amount ${monthStrings[periodMainMonth]}: ${
-              isNaN(allowanceAmount) ? "" : (allowanceAmount / 100).toFixed(2)
-            }`}
-          </Text>
+          <View style={{ alignItems: "center" }}>
+            <Text
+              style={{
+                fontSize: 30,
+                paddingHorizontal: 5,
+                marginTop: 10,
+                marginBottom: 5,
+                borderRadius: 5,
+                backgroundColor: colours.mauve,
+                width: "90%",
+                textAlign: "center",
+                color: "white"
+              }}
+            >
+              {isNaN(allowanceAmount) ? "" : (allowanceAmount / 100).toFixed(2)}
+            </Text>
+            <Text style={styles.text}>{`Total amount this month`}</Text>
+          </View>
         </TouchableOpacity>
         {this.state.showInput && (
           <Input
-            inputStyle={{ textAlign: "right" }}
+            inputStyle={{
+              textAlign: "right",
+              fontSize: 25
+            }}
             inputContainerStyle={styles.input}
             keyboardType="number-pad"
             onChangeText={text => {
@@ -111,12 +113,11 @@ const styles = StyleSheet.create({
     borderBottomColor: "rgba(0,0,0,0)",
     borderColor: "black",
     borderWidth: 1,
-    borderRadius: 2,
-    width: "50%"
+    borderRadius: 5,
+    marginTop: 5
   },
   text: {
-    fontSize: 16,
-    fontWeight: "bold"
+    fontSize: 12
   }
 });
 
