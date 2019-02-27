@@ -40,11 +40,8 @@ class BudgetCalculator extends Component<{}, State> {
     this.handlePreviousMonths();
   }
 
-  public updatePeriodTotal = (newTotal: string) => {
-    this.setState(
-      { periodTotalAmount: parseInt(newTotal, 10) },
-      this.storePeriodTotal
-    );
+  public updatePeriodTotal = (newTotal: number) => {
+    this.setState({ periodTotalAmount: newTotal }, this.storePeriodTotal);
   };
 
   public updatePeriodStart = (newStartDate: number) => {
