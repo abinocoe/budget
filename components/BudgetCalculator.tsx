@@ -59,7 +59,7 @@ class BudgetCalculator extends Component<{}, State> {
           delete this.state.dailyAmountsSpent[date];
         });
     }
-    this.setState({ periodStartDate: newStartDate }, this.storeData);
+    this.setState({ periodStartDate: newStartDate }, this.storeDateSelection);
   };
 
   public updateDayAmountSpent = (amountSpent: number, date: number) => {
@@ -167,6 +167,13 @@ class BudgetCalculator extends Component<{}, State> {
     );
   };
 
+  private storeDateSelection = async () => {
+    await AsyncStorage.setItem(
+      "periodStartDate",
+      this.state.periodStartDate.toString()
+    );
+  };
+
   private fetchData = async () => {
     const newState = {};
     const today = new Date();
@@ -183,6 +190,12 @@ class BudgetCalculator extends Component<{}, State> {
     if (periodTotalAmount !== null) {
       Object.assign(newState, {
         periodTotalAmount
+      });
+    }
+    const periodStartDate = await AsyncStorage.getItem("periodStartDate");
+    if (periodStartDate !== null) {
+      Object.assign(newState, {
+        periodStartDate
       });
     }
     this.setState(newState);
