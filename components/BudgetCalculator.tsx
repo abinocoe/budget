@@ -123,8 +123,9 @@ class BudgetCalculator extends Component<{}, State> {
   }
 
   private handlePreviousMonths = async () => {
-    const newDate = new Date();
-    newDate.setMonth(newDate.getMonth(), -1);
+    const now = new Date();
+    const periodStartMonth = getPeriodStartMonth(this.state.periodStartDate);
+    const newDate = new Date(now.getFullYear(), periodStartMonth - 1, 1);
     const lastMonthsData = await AsyncStorage.getItem(`${newDate.getMonth()}`);
     if (lastMonthsData !== null) {
       const data = JSON.parse(lastMonthsData);
@@ -135,7 +136,7 @@ class BudgetCalculator extends Component<{}, State> {
         );
       }
     }
-    newDate.setMonth(newDate.getMonth(), -1);
+    newDate.setMonth(newDate.getMonth() - 1);
     const monthBeforeThat = await AsyncStorage.getItem(`${newDate.getMonth()}`);
     if (monthBeforeThat !== null) {
       await AsyncStorage.removeItem(`${newDate.getMonth()}`);
