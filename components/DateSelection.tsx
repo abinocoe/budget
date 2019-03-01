@@ -34,7 +34,7 @@ class DateSelection extends Component<Props, State> {
               marginBottom: 5,
               borderRadius: 5,
               width: "90%",
-              backgroundColor: colours.mauve,
+              backgroundColor: colours.blue,
               textAlign: "center",
               color: "white",
               elevation: 3

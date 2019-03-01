@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import { Button, Icon, ListItem } from "react-native-elements";
+import { ListItem } from "react-native-elements";
 
 import * as colours from "../constants/colours";
 import { getFriendlyDate } from "../lib/date";
@@ -12,7 +12,6 @@ interface Props {
 }
 
 interface State {
-  editable: boolean;
   value: string;
   rawValue: string;
 }
@@ -20,12 +19,10 @@ class Day extends Component<Props, State> {
   public constructor(props: Props) {
     super(props);
     this.state = {
-      editable: false,
       value: "",
       rawValue: ""
     };
     this.amountChanged.bind(this);
-    this.handleButtonPress.bind(this);
   }
 
   public amountChanged(inputText: string) {
@@ -57,17 +54,13 @@ class Day extends Component<Props, State> {
     }
   }
 
-  public handleButtonPress = () =>
-    this.setState({ editable: !this.state.editable });
-
   public render() {
     return (
       <ListItem
         title={getFriendlyDate(this.props.date)}
         input={{
           containerStyle: styles.input,
-          editable: this.state.editable,
-          keyboardType: "number-pad",
+          keyboardType: "numeric",
           onChangeText: text => {
             this.amountChanged(text);
           },
@@ -86,24 +79,6 @@ class Day extends Component<Props, State> {
             : "0.00",
           value: this.state.value
         }}
-        rightElement={
-          <Button
-            buttonStyle={{
-              backgroundColor: this.state.editable
-                ? colours.mauve
-                : colours.lightPink,
-              elevation: 3
-            }}
-            icon={
-              this.state.editable ? (
-                <Icon name="check" size={20} color="white" />
-              ) : (
-                <Icon name="clear" size={20} color="white" />
-              )
-            }
-            onPress={this.handleButtonPress}
-          />
-        }
       />
     );
   }
@@ -118,8 +93,9 @@ const styles = StyleSheet.create({
     width: 20
   },
   input: {
-    backgroundColor: colours.lightPink,
-    borderRadius: 2,
+    borderRadius: 4,
+    borderColor: "pink",
+    borderWidth: 1,
     paddingRight: 5
   }
 });
