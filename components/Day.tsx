@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { ListItem } from "react-native-elements";
 
-import * as colours from "../constants/colours";
 import { getFriendlyDate } from "../lib/date";
 
 interface Props {
