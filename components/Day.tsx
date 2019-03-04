@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet } from "react-native";
-import { Button, Icon, ListItem } from "react-native-elements";
+import { StyleSheet, View } from "react-native";
+import { Input, ListItem, Text } from "react-native-elements";
 
-import * as colours from "../constants/colours";
 import { getFriendlyDate } from "../lib/date";
 
 interface Props {
@@ -25,7 +24,6 @@ class Day extends Component<Props, State> {
       rawValue: ""
     };
     this.amountChanged.bind(this);
-    this.handleButtonPress.bind(this);
   }
 
   public amountChanged(inputText: string) {
@@ -57,52 +55,51 @@ class Day extends Component<Props, State> {
     }
   }
 
-  public handleButtonPress = () =>
-    this.setState({ editable: !this.state.editable });
-
   public render() {
     return (
       <ListItem
         title={getFriendlyDate(this.props.date)}
-        input={{
-          containerStyle: styles.input,
-          editable: this.state.editable,
-          keyboardType: "number-pad",
-          onChangeText: text => {
-            this.amountChanged(text);
-          },
-          onEndEditing: e => {
-            if (e.nativeEvent.text !== "") {
-              const intAmount = e.nativeEvent.text.replace(".", "");
-              this.props.updateAmountSpent(
-                parseInt(intAmount, 10),
-                this.props.date
-              );
-              this.setState({ value: "", rawValue: "" });
-            }
-          },
-          placeholder: this.props.amountSpent
-            ? (this.props.amountSpent / 100).toFixed(2)
-            : "0.00",
-          value: this.state.value
-        }}
         rightElement={
-          <Button
-            buttonStyle={{
-              backgroundColor: this.state.editable
-                ? colours.mauve
-                : colours.lightPink,
-              elevation: 3
-            }}
-            icon={
-              this.state.editable ? (
-                <Icon name="check" size={20} color="white" />
-              ) : (
-                <Icon name="clear" size={20} color="white" />
-              )
-            }
-            onPress={this.handleButtonPress}
-          />
+          <View style={styles.view}>
+            {this.state.editable ? (
+              <Input
+                autoFocus={true}
+                containerStyle={styles.fillView}
+                inputContainerStyle={styles.removeUnderline}
+                inputStyle={styles.inputStyle}
+                keyboardType={"numeric"}
+                onChangeText={text => {
+                  this.amountChanged(text);
+                }}
+                onEndEditing={e => {
+                  if (e.nativeEvent.text !== "") {
+                    const intAmount = e.nativeEvent.text.replace(".", "");
+                    this.props.updateAmountSpent(
+                      parseInt(intAmount, 10),
+                      this.props.date
+                    );
+                  }
+                  this.setState({ value: "", rawValue: "", editable: false });
+                }}
+                placeholder={
+                  this.props.amountSpent
+                    ? (this.props.amountSpent / 100).toFixed(2)
+                    : "0.00"
+                }
+                placeholderTextColor="#A9A9A9"
+                value={this.state.value}
+              />
+            ) : (
+              <Text
+                style={styles.text}
+                onPress={() => this.setState({ editable: true })}
+              >
+                {this.props.amountSpent
+                  ? (this.props.amountSpent / 100).toFixed(2)
+                  : "0.00"}
+              </Text>
+            )}
+          </View>
         }
       />
     );
@@ -110,17 +107,32 @@ class Day extends Component<Props, State> {
 }
 
 const styles = StyleSheet.create({
+  fillView: {
+    paddingHorizontal: 0
+  },
+  inputStyle: {
+    textAlign: "right",
+    fontSize: 16,
+    paddingRight: 0,
+    marginRight: 0,
+    paddingVertical: 0
+  },
+  removeUnderline: {
+    borderBottomWidth: 0
+  },
   text: {
     fontSize: 16,
-    fontWeight: "bold"
+    color: "#A9A9A9"
   },
-  date: {
-    width: 20
-  },
-  input: {
-    backgroundColor: colours.lightPink,
-    borderRadius: 2,
-    paddingRight: 5
+  view: {
+    borderRadius: 4,
+    borderColor: "pink",
+    borderWidth: 1,
+    paddingRight: 5,
+    width: 100,
+    height: 44,
+    justifyContent: "center",
+    alignItems: "flex-end"
   }
 });
 

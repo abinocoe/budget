@@ -66,7 +66,7 @@ class PeriodAllowanceInput extends Component<Props> {
                 marginTop: 10,
                 marginBottom: 5,
                 borderRadius: 5,
-                backgroundColor: colours.mauve,
+                backgroundColor: colours.pink,
                 width: "90%",
                 textAlign: "center",
                 color: "white",
@@ -75,7 +75,7 @@ class PeriodAllowanceInput extends Component<Props> {
             >
               {isNaN(allowanceAmount) ? "" : (allowanceAmount / 100).toFixed(2)}
             </Text>
-            <Text style={styles.text}>{`Total amount this month`}</Text>
+            <Text style={styles.text}>Total amount this month</Text>
           </View>
         </TouchableOpacity>
         {this.state.showInput && (
@@ -112,7 +112,7 @@ class PeriodAllowanceInput extends Component<Props> {
 const styles = StyleSheet.create({
   input: {
     borderBottomColor: "rgba(0,0,0,0)",
-    borderColor: "black",
+    borderColor: "pink",
     borderWidth: 1,
     borderRadius: 5,
     marginTop: 5

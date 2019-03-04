@@ -1,6 +1,9 @@
-export const turquoise = "#3FEEE6";
-export const greyBlue = "#55BCC9";
-export const lightBlue = "#62BCFA";
-export const lightPink = "#FCCDD3";
-export const mauve = "#BBC4EF";
-export const purply = "#6534FF";
+export const red = "#E53935";
+export const pink = "#EC407A";
+export const purple = "#AB47BC";
+export const indigo = "#3F51B5";
+export const blue = "#2196F3";
+export const cyan = "#00BCD4";
+export const green = "#4CAF50";
+export const yellow = "#FFEB3B";
+export const orange = "#FF9800";

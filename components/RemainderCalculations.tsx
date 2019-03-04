@@ -44,7 +44,9 @@ const RemainderCalculations = ({
           updateAllowance={updateAllowance}
         />
         <View style={{ alignItems: "center" }}>
-          <Text style={styles.largeText}>{decimalise(amountRemaining)}</Text>
+          <Text style={[styles.largeText, { backgroundColor: colours.purple }]}>
+            {decimalise(amountRemaining)}
+          </Text>
           <Text style={styles.smallText}>Total remaining</Text>
         </View>
         <DateSelection
@@ -54,17 +56,19 @@ const RemainderCalculations = ({
       </View>
       <View style={styles.group}>
         <View style={{ alignItems: "center" }}>
-          <Text style={styles.largeText}>{decimalise(dailyAllowance)}</Text>
+          <Text style={[styles.largeText, { backgroundColor: colours.green }]}>
+            {decimalise(dailyAllowance)}
+          </Text>
           <Text style={styles.smallText}>Daily allowance</Text>
         </View>
         <View style={{ alignItems: "center" }}>
-          <Text style={styles.largeText}>
+          <Text style={[styles.largeText, { backgroundColor: colours.yellow }]}>
             {decimalise(amountRemaining / daysRemaining)}
           </Text>
           <Text style={styles.smallText}>Average per day remain</Text>
         </View>
         <View style={{ alignItems: "center" }}>
-          <Text style={styles.largeText}>
+          <Text style={[styles.largeText, { backgroundColor: colours.orange }]}>
             {decimalise(creditOrDebitAmount)}
           </Text>
           <Text style={styles.smallText}>
@@ -85,7 +89,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: "90%",
     textAlign: "center",
-    backgroundColor: colours.mauve,
     color: "white",
     elevation: 3
   },
