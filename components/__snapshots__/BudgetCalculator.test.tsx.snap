@@ -20,7 +20,11 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <RemainderCalculations
+<<<<<<< HEAD
           dailyAllowance={1613}
+=======
+          dailyAllowance={1612}
+>>>>>>> master
           daysElapsed={1}
           daysRemaining={31}
           intervalStartDate={25}
@@ -51,7 +55,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
+<<<<<<< HEAD
           "dailyAllowance": 1613,
+=======
+          "dailyAllowance": 1612,
+>>>>>>> master
           "daysElapsed": 1,
           "daysRemaining": 31,
           "intervalStartDate": 25,
@@ -88,7 +96,11 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <RemainderCalculations
+<<<<<<< HEAD
             dailyAllowance={1613}
+=======
+            dailyAllowance={1612}
+>>>>>>> master
             daysElapsed={1}
             daysRemaining={31}
             intervalStartDate={25}
