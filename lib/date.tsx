@@ -1,7 +1,7 @@
 import _ from "lodash";
 
-const today = new Date();
-const dateToday = today.getDate();
+export const today = new Date();
+export const dateToday = today.getDate();
 
 const dayStrings = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 

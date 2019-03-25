@@ -28,8 +28,10 @@ const RemainderCalculations = ({
   updateIntervalStartDate
 }: Props) => {
   const amountRemaining = totalAllowance - totalSpent;
-  const decimalise = (amount: number) => (amount / 100).toFixed(2).toString();
-  const creditOrDebitAmount = dailyAllowance * daysElapsed - totalSpent;
+  const decimalise = (amount: number) => (amount / 100).toFixed(2);
+  const creditOrDebitAmount =
+    (totalAllowance / (daysRemaining + (daysElapsed - 1))) * daysElapsed -
+    totalSpent;
   return (
     <View
       style={{
@@ -69,10 +71,16 @@ const RemainderCalculations = ({
         </View>
         <View style={{ alignItems: "center" }}>
           <Text style={[styles.largeText, { backgroundColor: colours.orange }]}>
-            {decimalise(creditOrDebitAmount)}
+            {decimalise(
+              Math.abs(parseFloat((creditOrDebitAmount / 100).toFixed(2))) === 0
+                ? Math.abs(creditOrDebitAmount)
+                : creditOrDebitAmount
+            )}
           </Text>
           <Text style={styles.smallText}>
-            {creditOrDebitAmount >= 0 ? `Amount credit` : `Amount debit`}
+            {parseFloat(decimalise(creditOrDebitAmount)) >= -0
+              ? `Amount credit`
+              : `Amount debit`}
           </Text>
         </View>
       </View>

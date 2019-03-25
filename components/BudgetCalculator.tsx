@@ -92,7 +92,7 @@ class BudgetCalculator extends Component<{}, State> {
       periodStartMonth
     ).length;
     const daysRemaining = daysInStartMonth - daysElapsed + 1;
-    const dailyAllowance = Math.floor(
+    const dailyAllowance = Math.round(
       this.state.periodTotalAmount / daysInStartMonth
     );
     return (
