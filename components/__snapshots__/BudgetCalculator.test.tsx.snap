@@ -20,9 +20,9 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <RemainderCalculations
-          dailyAllowance={1785}
-          daysElapsed={8}
-          daysRemaining={21}
+          dailyAllowance={1612.9}
+          daysElapsed={1}
+          daysRemaining={31}
           intervalStartDate={25}
           totalAllowance={50000}
           totalSpent={0}
@@ -51,9 +51,9 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "dailyAllowance": 1785,
-          "daysElapsed": 8,
-          "daysRemaining": 21,
+          "dailyAllowance": 1612.9,
+          "daysElapsed": 1,
+          "daysRemaining": 31,
           "intervalStartDate": 25,
           "totalAllowance": 50000,
           "totalSpent": 0,
@@ -88,9 +88,9 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <RemainderCalculations
-            dailyAllowance={1785}
-            daysElapsed={8}
-            daysRemaining={21}
+            dailyAllowance={1612.9}
+            daysElapsed={1}
+            daysRemaining={31}
             intervalStartDate={25}
             totalAllowance={50000}
             totalSpent={0}
@@ -119,9 +119,9 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "dailyAllowance": 1785,
-            "daysElapsed": 8,
-            "daysRemaining": 21,
+            "dailyAllowance": 1612.9,
+            "daysElapsed": 1,
+            "daysRemaining": 31,
             "intervalStartDate": 25,
             "totalAllowance": 50000,
             "totalSpent": 0,
