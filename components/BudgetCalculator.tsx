@@ -96,7 +96,6 @@ class BudgetCalculator extends Component<{}, State> {
     );
     return (
       <View
-        // forceInset={{ top: "always", bottom: "always" }}
         style={{
           flex: 1,
           marginHorizontal: "5%"
