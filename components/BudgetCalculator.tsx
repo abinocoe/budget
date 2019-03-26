@@ -1,7 +1,6 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import { AsyncStorage } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { AsyncStorage, View } from "react-native";
 
 import {
   getDisplayDays,
@@ -96,8 +95,8 @@ class BudgetCalculator extends Component<{}, State> {
       this.state.periodTotalAmount / daysInStartMonth
     );
     return (
-      <SafeAreaView
-        forceInset={{ top: "always", bottom: "always" }}
+      <View
+        // forceInset={{ top: "always", bottom: "always" }}
         style={{
           flex: 1,
           marginHorizontal: "5%"
@@ -118,7 +117,7 @@ class BudgetCalculator extends Component<{}, State> {
           updateAmountSpent={this.updateDayAmountSpent}
           amountsSpent={this.state.dailyAmountsSpent}
         />
-      </SafeAreaView>
+      </View>
     );
   }
 
