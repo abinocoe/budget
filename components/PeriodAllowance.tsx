@@ -55,55 +55,74 @@ class PeriodAllowanceInput extends Component<Props> {
     const { updateAllowance, allowanceAmount } = this.props;
     return (
       <View>
-        <TouchableOpacity
-          onPress={() => this.setState({ showInput: !this.state.showInput })}
-        >
+        {!this.state.showInput ? (
+          <TouchableOpacity
+            onPress={() => this.setState({ showInput: !this.state.showInput })}
+          >
+            <View style={{ alignItems: "center" }}>
+              <Text
+                style={{
+                  fontSize: 30,
+                  paddingHorizontal: 5,
+                  marginTop: 10,
+                  marginBottom: 5,
+                  borderRadius: 5,
+                  backgroundColor: colours.pink,
+                  width: "90%",
+                  textAlign: "center",
+                  color: "white",
+                  elevation: 3
+                }}
+              >
+                {isNaN(allowanceAmount)
+                  ? ""
+                  : (allowanceAmount / 100).toFixed(2)}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        ) : (
           <View style={{ alignItems: "center" }}>
-            <Text
-              style={{
-                fontSize: 30,
-                paddingHorizontal: 5,
+            <Input
+              containerStyle={{
                 marginTop: 10,
-                marginBottom: 5,
-                borderRadius: 5,
-                backgroundColor: colours.pink,
-                width: "90%",
-                textAlign: "center",
-                color: "white",
-                elevation: 3
+                marginBottom: 5
               }}
-            >
-              {isNaN(allowanceAmount) ? "" : (allowanceAmount / 100).toFixed(2)}
-            </Text>
-            <Text style={styles.text}>Total amount this month</Text>
-          </View>
-        </TouchableOpacity>
-        {this.state.showInput && (
-          <Input
-            inputStyle={{
-              textAlign: "right",
-              fontSize: 25
-            }}
-            inputContainerStyle={styles.input}
-            keyboardType="number-pad"
-            onChangeText={text => {
-              this.amountChanged(text);
-            }}
-            onEndEditing={e => {
-              if (e.nativeEvent.text !== "") {
-                const intAmount = e.nativeEvent.text.replace(".", "");
-                updateAllowance(parseInt(intAmount, 10));
-                this.setState({ value: "", rawValue: "" });
+              style={{ color: "white" }}
+              inputStyle={{
+                color: "white",
+                textAlign: "right",
+                fontSize: 30,
+                padding: 0,
+                paddingRight: 5
+              }}
+              placeholderTextColor="white"
+              inputContainerStyle={styles.input}
+              keyboardType="number-pad"
+              onChangeText={text => {
+                this.amountChanged(text);
+              }}
+              onEndEditing={e => {
+                if (e.nativeEvent.text !== "") {
+                  const intAmount = e.nativeEvent.text.replace(".", "");
+                  updateAllowance(parseInt(intAmount, 10));
+                  this.setState({
+                    value: "",
+                    rawValue: "",
+                    showInput: !this.state.showInput
+                  });
+                }
+              }}
+              onBlur={() => this.setState({ showInput: !this.state.showInput })}
+              placeholder={
+                isNaN(allowanceAmount)
+                  ? "0.00"
+                  : (allowanceAmount / 100).toFixed(2)
               }
-            }}
-            placeholder={
-              isNaN(allowanceAmount)
-                ? "0.00"
-                : (allowanceAmount / 100).toFixed(2)
-            }
-            value={this.state.value}
-          />
+              value={this.state.value}
+            />
+          </View>
         )}
+        <Text style={styles.text}>Total amount this month</Text>
       </View>
     );
   }
@@ -112,10 +131,9 @@ class PeriodAllowanceInput extends Component<Props> {
 const styles = StyleSheet.create({
   input: {
     borderBottomColor: "rgba(0,0,0,0)",
-    borderColor: "pink",
-    borderWidth: 1,
     borderRadius: 5,
-    marginTop: 5
+    elevation: 2,
+    backgroundColor: "pink"
   },
   text: {
     fontSize: 12
