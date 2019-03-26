@@ -35,10 +35,6 @@ ShallowWrapper {
           updateAmountSpent={[Function]}
         />,
       ],
-      "forceInset": Object {
-        "bottom": "always",
-        "top": "always",
-      },
       "style": Object {
         "flex": 1,
         "marginHorizontal": "5%",
@@ -103,10 +99,6 @@ ShallowWrapper {
             updateAmountSpent={[Function]}
           />,
         ],
-        "forceInset": Object {
-          "bottom": "always",
-          "top": "always",
-        },
         "style": Object {
           "flex": 1,
           "marginHorizontal": "5%",
