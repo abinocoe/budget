@@ -109,17 +109,16 @@ class PeriodAllowanceInput extends Component<Props> {
                 this.amountChanged(text);
               }}
               onEndEditing={e => {
+                this.setState({ showInput: !this.state.showInput });
                 if (e.nativeEvent.text !== "") {
                   const intAmount = e.nativeEvent.text.replace(".", "");
                   updateAllowance(parseInt(intAmount, 10));
                   this.setState({
                     value: "",
-                    rawValue: "",
-                    showInput: !this.state.showInput
+                    rawValue: ""
                   });
                 }
               }}
-              onBlur={() => this.setState({ showInput: !this.state.showInput })}
               placeholder={
                 isNaN(allowanceAmount)
                   ? "0.00"
