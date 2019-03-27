@@ -4399,6 +4399,11 @@ react-is@^16.7.0, react-is@^16.8.1:
   version "16.8.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.1.tgz#a80141e246eb894824fb4f2901c0c50ef31d4cdb"
 
+react-native-custom-picker@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-custom-picker/-/react-native-custom-picker-0.3.1.tgz#8ebea470f1b23590368a427e4bb50ee9e7c85969"
+  integrity sha512-pRyVwOVw1spxjV+chPAfeZ0skanvSd5LTE11grl9UD7SU2n1zgNUGdHg/Xw5Aa09wNpr8+mZ+mC8KbvWS1f3wg==
+
 react-native-elements@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-1.0.0.tgz#95bc194f61ec4658d8dbd977524f8c4fd3ada136"
