@@ -59,7 +59,7 @@ class PeriodAllowanceInput extends Component<Props> {
           <TouchableOpacity
             onPress={() => this.setState({ showInput: !this.state.showInput })}
           >
-            <View style={{ alignItems: "center" }}>
+            <View style={{ alignItems: "center", justifyContent: "center" }}>
               <Text
                 style={{
                   fontSize: 30,
@@ -83,9 +83,15 @@ class PeriodAllowanceInput extends Component<Props> {
         ) : (
           <View style={{ alignItems: "center" }}>
             <Input
+              autoFocus={true}
               containerStyle={{
                 marginTop: 10,
-                marginBottom: 5
+                marginBottom: 5,
+                backgroundColor: "pink",
+                width: "90%",
+                borderRadius: 5,
+                elevation: 2,
+                height: 40
               }}
               style={{ color: "white" }}
               inputStyle={{
@@ -93,10 +99,11 @@ class PeriodAllowanceInput extends Component<Props> {
                 textAlign: "right",
                 fontSize: 30,
                 padding: 0,
-                paddingRight: 5
+                paddingRight: 5,
+                borderColor: "transparent"
               }}
               placeholderTextColor="white"
-              inputContainerStyle={styles.input}
+              inputContainerStyle={styles.inputContainerStyle}
               keyboardType="number-pad"
               onChangeText={text => {
                 this.amountChanged(text);
@@ -129,11 +136,8 @@ class PeriodAllowanceInput extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  input: {
-    borderBottomColor: "rgba(0,0,0,0)",
-    borderRadius: 5,
-    elevation: 2,
-    backgroundColor: "pink"
+  inputContainerStyle: {
+    borderBottomColor: "rgba(0,0,0,0)"
   },
   text: {
     fontSize: 12
