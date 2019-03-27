@@ -125,6 +125,7 @@ class BudgetCalculator extends Component<{}, State> {
     const periodStartMonth = getPeriodStartMonth(this.state.periodStartDate);
     const newDate = new Date(now.getFullYear(), periodStartMonth - 1, 1);
     const lastMonthsData = await AsyncStorage.getItem(`${newDate.getMonth()}`);
+    // remove last month's daily amounts and save total spent in their place
     if (lastMonthsData !== null) {
       const data = JSON.parse(lastMonthsData);
       if (data.periodTotalAmount && data.periodTotalSpent) {
@@ -135,6 +136,7 @@ class BudgetCalculator extends Component<{}, State> {
       }
     }
     newDate.setMonth(newDate.getMonth() - 1);
+    // delete data from two months prior to current period
     const monthBeforeThat = await AsyncStorage.getItem(`${newDate.getMonth()}`);
     if (monthBeforeThat !== null) {
       await AsyncStorage.removeItem(`${newDate.getMonth()}`);
