@@ -26,16 +26,20 @@ const DayInputsContainer = ({
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1, marginVertical: 30 }}>
-        {days.map(date => (
-          <Day
-            amountSpent={
-              amountsSpentThisMonth[date] || amountsSpentLastMonth[date]
-            }
-            date={date}
-            key={date}
-            updateAmountSpent={updateAmountSpent}
-          />
-        ))}
+        {days.map(date => {
+          const amountSpent =
+            date < startNumber
+              ? amountsSpentThisMonth && amountsSpentThisMonth[date]
+              : amountsSpentLastMonth && amountsSpentLastMonth[date];
+          return (
+            <Day
+              amountSpent={amountSpent || undefined}
+              date={date}
+              key={date}
+              updateAmountSpent={updateAmountSpent}
+            />
+          );
+        })}
       </ScrollView>
     </View>
   );

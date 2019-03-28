@@ -5,7 +5,7 @@ import { Input, ListItem, Text } from "react-native-elements";
 import { getFriendlyDate } from "../lib/date";
 
 interface Props {
-  amountSpent: number;
+  amountSpent?: number;
   date: number;
   updateAmountSpent: (amount: number, day: number) => void;
 }
