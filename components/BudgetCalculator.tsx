@@ -36,7 +36,7 @@ class BudgetCalculator extends Component<{}, State> {
 
   public componentWillMount() {
     this.fetchData();
-    // TODO handle garbage collection of AsyncStorage
+    // TODO handle garbage collection of AsyncStorage ?
   }
 
   public updatePeriodTotal = (newTotal: number) => {
