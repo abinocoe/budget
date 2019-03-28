@@ -12,7 +12,8 @@ import DayInputs from "./DayInputsContainer";
 import RemainderCalculations from "./RemainderCalculations";
 
 interface State {
-  dailyAmountsSpent: any;
+  thisMonthAmountsSpent: { [index: string]: number };
+  lastMonthAmountsSpent: { [index: string]: number };
   periodTotalAmount: number;
   periodTotalSpent: number;
   periodStartDate: number;
@@ -22,7 +23,8 @@ class BudgetCalculator extends Component<{}, State> {
   public constructor(props: any) {
     super(props);
     this.state = {
-      dailyAmountsSpent: {},
+      thisMonthAmountsSpent: {},
+      lastMonthAmountsSpent: {},
       periodTotalAmount: 50000,
       periodTotalSpent: 0,
       periodStartDate: 25
@@ -34,7 +36,7 @@ class BudgetCalculator extends Component<{}, State> {
 
   public componentWillMount() {
     this.fetchData();
-    this.handlePreviousMonths();
+    // TODO handle garbage collection of AsyncStorage
   }
 
   public updatePeriodTotal = (newTotal: number) => {
@@ -42,42 +44,59 @@ class BudgetCalculator extends Component<{}, State> {
   };
 
   public updatePeriodStart = (newStartDate: number) => {
-    if (newStartDate > this.state.periodStartDate) {
-      _.range(this.state.periodStartDate, newStartDate).map(date => {
-        delete this.state.dailyAmountsSpent[date];
-      });
-    } else if (newStartDate < this.state.periodStartDate) {
-      _.range(
-        this.state.periodStartDate + 1,
-        numberOfDaysInStartMonth(getPeriodStartMonth(newStartDate))
-      )
-        .concat(newStartDate === 1 ? [1] : _.range(1, newStartDate))
-        .map(date => {
-          delete this.state.dailyAmountsSpent[date];
-        });
-    }
-    this.setState({ periodStartDate: newStartDate }, this.storeDateSelection);
+    this.setState(
+      {
+        periodStartDate: newStartDate
+      },
+      this.storeDateSelection
+    );
   };
 
   public updateDayAmountSpent = (amountSpent: number, date: number) => {
-    let periodTotalSpent = 0;
-    const dailyAmountsSpent = {
-      ...this.state.dailyAmountsSpent,
-      [date]: amountSpent
-    };
-    if (isNaN(amountSpent)) {
-      delete dailyAmountsSpent[date];
+    const thisMonthAmountsObject = this.state.thisMonthAmountsSpent;
+    const lastMonthAmountsObject = this.state.lastMonthAmountsSpent;
+    const isCurrentDateInStartMonth =
+      new Date().getDate() >= this.state.periodStartDate;
+    const isUpdatedAmountInStartMonth = date >= this.state.periodStartDate;
+
+    if (isUpdatedAmountInStartMonth) {
+      isNaN(amountSpent)
+        ? delete thisMonthAmountsObject[date]
+        : (thisMonthAmountsObject[date] = amountSpent);
+    } else {
+      isNaN(amountSpent)
+        ? delete lastMonthAmountsObject[date]
+        : (lastMonthAmountsObject[date] = amountSpent);
     }
-    const dayTotalArray = Object.keys(dailyAmountsSpent);
+
+    let periodTotalSpent = 0;
+    let dayTotalArray;
+
+    if (isCurrentDateInStartMonth) {
+      dayTotalArray = Object.keys(thisMonthAmountsObject).filter(
+        key => parseInt(key, 10) >= this.state.periodStartDate
+      );
+    } else {
+      dayTotalArray = Object.keys(lastMonthAmountsObject)
+        .filter(key => parseInt(key, 10) >= this.state.periodStartDate)
+        .concat(Object.keys(thisMonthAmountsObject));
+    }
+
     if (dayTotalArray.length > 0) {
       periodTotalSpent = dayTotalArray
-        .map((k: string) => dailyAmountsSpent[k])
+        .map((k: string) =>
+          parseInt(k, 10) >= this.state.periodStartDate
+            ? lastMonthAmountsObject[k]
+            : thisMonthAmountsObject[k]
+        )
         .reduce((a, b) => a + b);
     }
+
     this.setState(
       {
-        dailyAmountsSpent,
-        periodTotalSpent
+        periodTotalSpent,
+        thisMonthAmountsSpent: thisMonthAmountsObject,
+        lastMonthAmountsSpent: lastMonthAmountsObject
       },
       this.storeData
     );
@@ -114,43 +133,28 @@ class BudgetCalculator extends Component<{}, State> {
         <DayInputs
           startNumber={this.state.periodStartDate}
           updateAmountSpent={this.updateDayAmountSpent}
-          amountsSpent={this.state.dailyAmountsSpent}
+          amountsSpentThisMonth={this.state.thisMonthAmountsSpent}
+          amountsSpentLastMonth={this.state.lastMonthAmountsSpent}
         />
       </View>
     );
   }
 
-  private handlePreviousMonths = async () => {
-    const now = new Date();
-    const periodStartMonth = getPeriodStartMonth(this.state.periodStartDate);
-    const newDate = new Date(now.getFullYear(), periodStartMonth - 1, 1);
-    const lastMonthsData = await AsyncStorage.getItem(`${newDate.getMonth()}`);
-    // remove last month's daily amounts and save total spent in their place
-    if (lastMonthsData !== null) {
-      const data = JSON.parse(lastMonthsData);
-      if (data.periodTotalAmount && data.periodTotalSpent) {
-        await AsyncStorage.setItem(
-          `${newDate.getMonth()}`,
-          (data.periodTotalAmount - data.periodTotalSpent).toString()
-        );
-      }
-    }
-    newDate.setMonth(newDate.getMonth() - 1);
-    // delete data from two months prior to current period
-    const monthBeforeThat = await AsyncStorage.getItem(`${newDate.getMonth()}`);
-    if (monthBeforeThat !== null) {
-      await AsyncStorage.removeItem(`${newDate.getMonth()}`);
-    }
-  };
-
   private storeData = async () => {
     const today = new Date();
-    const data = this.state;
-    const jsonOfItem = await AsyncStorage.setItem(
-      `${today.getMonth()}`,
-      JSON.stringify(data)
-    );
-    return jsonOfItem;
+    const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+    const thisMonthsData = this.state.thisMonthAmountsSpent;
+    const lastMonthsData = this.state.lastMonthAmountsSpent;
+    await AsyncStorage.multiSet([
+      [
+        `${today.getMonth()}-${today.getFullYear()}`,
+        JSON.stringify(thisMonthsData)
+      ],
+      [
+        `${lastMonth.getMonth()}-${lastMonth.getFullYear()}`,
+        JSON.stringify(lastMonthsData)
+      ]
+    ]);
   };
 
   private storePeriodTotal = async () => {
@@ -170,13 +174,17 @@ class BudgetCalculator extends Component<{}, State> {
   private fetchData = async () => {
     const newState = {};
     const today = new Date();
-    const dailyTotals = await AsyncStorage.getItem(`${today.getMonth()}`);
-    if (dailyTotals !== null) {
-      const dailyData = JSON.parse(dailyTotals);
+    const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+    const totals = await AsyncStorage.multiGet([
+      `${today.getMonth()}-${today.getFullYear()}`,
+      `${lastMonth.getMonth()}-${lastMonth.getFullYear()}`
+    ]);
+    if (totals !== null) {
+      const thisMonthsData = JSON.parse(totals[0][1]);
+      const lastMonthsData = JSON.parse(totals[1][1]);
       Object.assign(newState, {
-        dailyAmountsSpent: dailyData.dailyAmountsSpent,
-        periodTotalSpent: dailyData.periodTotalSpent,
-        periodStartDate: dailyData.periodStartDate
+        thisMonthAmountsSpent: thisMonthsData,
+        lastMonthAmountsSpent: lastMonthsData
       });
     }
     const periodTotalAmount = await AsyncStorage.getItem("periodTotalAmount");

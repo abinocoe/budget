@@ -7,13 +7,15 @@ import { getDisplayDays, getPeriodStartMonth } from "../lib/date";
 import Day from "./Day";
 
 interface Props {
-  amountsSpent: { [index: number]: number };
+  amountsSpentThisMonth: { [index: string]: number };
+  amountsSpentLastMonth: { [index: string]: number };
   startNumber: number;
   updateAmountSpent: (amount: number, day: number) => void;
 }
 
 const DayInputsContainer = ({
-  amountsSpent,
+  amountsSpentThisMonth,
+  amountsSpentLastMonth,
   startNumber,
   updateAmountSpent
 }: Props) => {
@@ -26,7 +28,9 @@ const DayInputsContainer = ({
       <ScrollView style={{ flex: 1, marginVertical: 30 }}>
         {days.map(date => (
           <Day
-            amountSpent={amountsSpent[date]}
+            amountSpent={
+              amountsSpentThisMonth[date] || amountsSpentLastMonth[date]
+            }
             date={date}
             key={date}
             updateAmountSpent={updateAmountSpent}
