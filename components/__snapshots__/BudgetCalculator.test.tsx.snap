@@ -30,15 +30,12 @@ ShallowWrapper {
           updateIntervalStartDate={[Function]}
         />,
         <DayInputsContainer
-          amountsSpent={Object {}}
+          amountsSpentLastMonth={Object {}}
+          amountsSpentThisMonth={Object {}}
           startNumber={25}
           updateAmountSpent={[Function]}
         />,
       ],
-      "forceInset": Object {
-        "bottom": "always",
-        "top": "always",
-      },
       "style": Object {
         "flex": 1,
         "marginHorizontal": "5%",
@@ -69,7 +66,8 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
-          "amountsSpent": Object {},
+          "amountsSpentLastMonth": Object {},
+          "amountsSpentThisMonth": Object {},
           "startNumber": 25,
           "updateAmountSpent": [Function],
         },
@@ -98,15 +96,12 @@ ShallowWrapper {
             updateIntervalStartDate={[Function]}
           />,
           <DayInputsContainer
-            amountsSpent={Object {}}
+            amountsSpentLastMonth={Object {}}
+            amountsSpentThisMonth={Object {}}
             startNumber={25}
             updateAmountSpent={[Function]}
           />,
         ],
-        "forceInset": Object {
-          "bottom": "always",
-          "top": "always",
-        },
         "style": Object {
           "flex": 1,
           "marginHorizontal": "5%",
@@ -137,7 +132,8 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
-            "amountsSpent": Object {},
+            "amountsSpentLastMonth": Object {},
+            "amountsSpentThisMonth": Object {},
             "startNumber": 25,
             "updateAmountSpent": [Function],
           },
