@@ -29,11 +29,11 @@ const DayInputsContainer = ({
         {days.map(date => {
           const amountSpent =
             date < startNumber
-              ? amountsSpentThisMonth && amountsSpentThisMonth[date]
-              : amountsSpentLastMonth && amountsSpentLastMonth[date];
+              ? amountsSpentLastMonth[date]
+              : amountsSpentThisMonth[date];
           return (
             <Day
-              amountSpent={amountSpent || undefined}
+              amountSpent={amountSpent}
               date={date}
               key={date}
               updateAmountSpent={updateAmountSpent}

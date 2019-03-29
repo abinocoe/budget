@@ -53,20 +53,40 @@ class BudgetCalculator extends Component<{}, State> {
   };
 
   public updateDayAmountSpent = (amountSpent: number, date: number) => {
-    const thisMonthAmountsObject = this.state.thisMonthAmountsSpent;
-    const lastMonthAmountsObject = this.state.lastMonthAmountsSpent;
+    let thisMonthAmountsObject = this.state.thisMonthAmountsSpent;
+    let lastMonthAmountsObject = this.state.lastMonthAmountsSpent;
     const isCurrentDateInStartMonth =
       new Date().getDate() >= this.state.periodStartDate;
     const isUpdatedAmountInStartMonth = date >= this.state.periodStartDate;
-
     if (isUpdatedAmountInStartMonth) {
-      isNaN(amountSpent)
-        ? delete thisMonthAmountsObject[date]
-        : (thisMonthAmountsObject[date] = amountSpent);
+      if (isCurrentDateInStartMonth) {
+        if (isNaN(amountSpent)) {
+          delete thisMonthAmountsObject[date];
+        } else {
+          thisMonthAmountsObject = {
+            ...this.state.thisMonthAmountsSpent,
+            [date]: amountSpent
+          };
+        }
+      } else {
+        if (isNaN(amountSpent)) {
+          delete lastMonthAmountsObject[date];
+        } else {
+          lastMonthAmountsObject = {
+            ...this.state.lastMonthAmountsSpent,
+            [date]: amountSpent
+          };
+        }
+      }
     } else {
-      isNaN(amountSpent)
-        ? delete lastMonthAmountsObject[date]
-        : (lastMonthAmountsObject[date] = amountSpent);
+      if (isNaN(amountSpent)) {
+        delete thisMonthAmountsObject[date];
+      } else {
+        thisMonthAmountsObject = {
+          ...this.state.thisMonthAmountsSpent,
+          [date]: amountSpent
+        };
+      }
     }
 
     let periodTotalSpent = 0;
@@ -86,12 +106,13 @@ class BudgetCalculator extends Component<{}, State> {
       periodTotalSpent = dayTotalArray
         .map((k: string) =>
           parseInt(k, 10) >= this.state.periodStartDate
-            ? lastMonthAmountsObject[k]
+            ? isCurrentDateInStartMonth
+              ? thisMonthAmountsObject[k]
+              : lastMonthAmountsObject[k]
             : thisMonthAmountsObject[k]
         )
         .reduce((a, b) => a + b);
     }
-
     this.setState(
       {
         periodTotalSpent,
@@ -179,11 +200,15 @@ class BudgetCalculator extends Component<{}, State> {
       `${today.getMonth()}-${today.getFullYear()}`,
       `${lastMonth.getMonth()}-${lastMonth.getFullYear()}`
     ]);
-    if (totals !== null) {
-      const thisMonthsData = JSON.parse(totals[0][1]);
-      const lastMonthsData = JSON.parse(totals[1][1]);
+    const thisMonthsData = JSON.parse(totals[0][1]);
+    const lastMonthsData = JSON.parse(totals[1][1]);
+    if (thisMonthsData !== null) {
       Object.assign(newState, {
-        thisMonthAmountsSpent: thisMonthsData,
+        thisMonthAmountsSpent: thisMonthsData
+      });
+    }
+    if (lastMonthsData !== null) {
+      Object.assign(newState, {
         lastMonthAmountsSpent: lastMonthsData
       });
     }
