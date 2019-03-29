@@ -57,36 +57,28 @@ class BudgetCalculator extends Component<{}, State> {
     let lastMonthAmountsObject = this.state.lastMonthAmountsSpent;
     const isCurrentDateInStartMonth =
       new Date().getDate() >= this.state.periodStartDate;
-    const isUpdatedAmountInStartMonth = date >= this.state.periodStartDate;
-    if (isUpdatedAmountInStartMonth) {
-      if (isCurrentDateInStartMonth) {
-        if (isNaN(amountSpent)) {
-          delete thisMonthAmountsObject[date];
-        } else {
-          thisMonthAmountsObject = {
-            ...this.state.thisMonthAmountsSpent,
-            [date]: amountSpent
-          };
-        }
-      } else {
-        if (isNaN(amountSpent)) {
-          delete lastMonthAmountsObject[date];
-        } else {
-          lastMonthAmountsObject = {
-            ...this.state.lastMonthAmountsSpent,
-            [date]: amountSpent
-          };
-        }
+
+    const isThisMonth = (dateToCheck: number) => {
+      const todaysDate = new Date().getDate();
+      if (
+        dateToCheck >= this.state.periodStartDate &&
+        todaysDate < this.state.periodStartDate
+      ) {
+        return false;
       }
+      return true;
+    };
+
+    if (isThisMonth(date)) {
+      thisMonthAmountsObject = {
+        ...this.state.thisMonthAmountsSpent,
+        [date]: amountSpent
+      };
     } else {
-      if (isNaN(amountSpent)) {
-        delete thisMonthAmountsObject[date];
-      } else {
-        thisMonthAmountsObject = {
-          ...this.state.thisMonthAmountsSpent,
-          [date]: amountSpent
-        };
-      }
+      lastMonthAmountsObject = {
+        ...this.state.lastMonthAmountsSpent,
+        [date]: amountSpent
+      };
     }
 
     let periodTotalSpent = 0;
@@ -105,11 +97,9 @@ class BudgetCalculator extends Component<{}, State> {
     if (dayTotalArray.length > 0) {
       periodTotalSpent = dayTotalArray
         .map((k: string) =>
-          parseInt(k, 10) >= this.state.periodStartDate
-            ? isCurrentDateInStartMonth
-              ? thisMonthAmountsObject[k]
-              : lastMonthAmountsObject[k]
-            : thisMonthAmountsObject[k]
+          isThisMonth(parseInt(k, 10))
+            ? thisMonthAmountsObject[k]
+            : lastMonthAmountsObject[k]
         )
         .reduce((a, b) => a + b);
     }
