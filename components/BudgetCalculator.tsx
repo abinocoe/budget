@@ -55,21 +55,8 @@ class BudgetCalculator extends Component<{}, State> {
   public updateDayAmountSpent = (amountSpent: number, date: number) => {
     let thisMonthAmountsObject = this.state.thisMonthAmountsSpent;
     let lastMonthAmountsObject = this.state.lastMonthAmountsSpent;
-    const isCurrentDateInStartMonth =
-      new Date().getDate() >= this.state.periodStartDate;
 
-    const isThisMonth = (dateToCheck: number) => {
-      const todaysDate = new Date().getDate();
-      if (
-        dateToCheck >= this.state.periodStartDate &&
-        todaysDate < this.state.periodStartDate
-      ) {
-        return false;
-      }
-      return true;
-    };
-
-    if (isThisMonth(date)) {
+    if (this.isThisMonth(date)) {
       thisMonthAmountsObject = {
         ...this.state.thisMonthAmountsSpent,
         [date]: amountSpent
@@ -81,35 +68,21 @@ class BudgetCalculator extends Component<{}, State> {
       };
     }
 
-    let periodTotalSpent = 0;
-    let dayTotalArray;
+    const periodTotalSpent = this.calculateTotalSpent(
+      thisMonthAmountsObject,
+      lastMonthAmountsObject
+    );
 
-    if (isCurrentDateInStartMonth) {
-      dayTotalArray = Object.keys(thisMonthAmountsObject).filter(
-        key => parseInt(key, 10) >= this.state.periodStartDate
-      );
-    } else {
-      dayTotalArray = Object.keys(lastMonthAmountsObject)
-        .filter(key => parseInt(key, 10) >= this.state.periodStartDate)
-        .concat(Object.keys(thisMonthAmountsObject));
-    }
-
-    if (dayTotalArray.length > 0) {
-      periodTotalSpent = dayTotalArray
-        .map((k: string) =>
-          isThisMonth(parseInt(k, 10))
-            ? thisMonthAmountsObject[k]
-            : lastMonthAmountsObject[k]
-        )
-        .reduce((a, b) => a + b);
-    }
     this.setState(
       {
         periodTotalSpent,
         thisMonthAmountsSpent: thisMonthAmountsObject,
         lastMonthAmountsSpent: lastMonthAmountsObject
       },
-      this.storeData
+      () => {
+        this.storeData();
+        this.storePeriodTotal();
+      }
     );
   };
 
@@ -186,6 +159,21 @@ class BudgetCalculator extends Component<{}, State> {
     const newState = {};
     const today = new Date();
     const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+    // TODO this doesn't need to be stored
+    const periodTotalAmount = await AsyncStorage.getItem("periodTotalAmount");
+    if (periodTotalAmount !== null) {
+      Object.assign(newState, {
+        periodTotalAmount
+      });
+    }
+
+    const periodStartDate = await AsyncStorage.getItem("periodStartDate");
+    if (periodStartDate !== null) {
+      Object.assign(newState, {
+        periodStartDate
+      });
+    }
+
     const totals = await AsyncStorage.multiGet([
       `${today.getMonth()}-${today.getFullYear()}`,
       `${lastMonth.getMonth()}-${lastMonth.getFullYear()}`
@@ -202,19 +190,55 @@ class BudgetCalculator extends Component<{}, State> {
         lastMonthAmountsSpent: lastMonthsData
       });
     }
-    const periodTotalAmount = await AsyncStorage.getItem("periodTotalAmount");
-    if (periodTotalAmount !== null) {
-      Object.assign(newState, {
-        periodTotalAmount
-      });
+    this.setState(newState, () => {
+      const periodTotalSpent = this.calculateTotalSpent(
+        this.state.thisMonthAmountsSpent,
+        this.state.lastMonthAmountsSpent
+      );
+      this.setState({ periodTotalSpent });
+    });
+  };
+
+  private isThisMonth = (dateToCheck: number) => {
+    const todaysDate = new Date().getDate();
+    if (
+      dateToCheck >= this.state.periodStartDate &&
+      todaysDate < this.state.periodStartDate
+    ) {
+      return false;
     }
-    const periodStartDate = await AsyncStorage.getItem("periodStartDate");
-    if (periodStartDate !== null) {
-      Object.assign(newState, {
-        periodStartDate
-      });
+    return true;
+  };
+
+  private calculateTotalSpent = (
+    thisMonthAmountsObject: any,
+    lastMonthAmountsObject: any
+  ) => {
+    const isCurrentDateInStartMonth =
+      new Date().getDate() >= this.state.periodStartDate;
+    let dayTotalArray;
+
+    if (isCurrentDateInStartMonth) {
+      dayTotalArray = Object.keys(thisMonthAmountsObject).filter(
+        key => parseInt(key, 10) >= this.state.periodStartDate
+      );
+    } else {
+      dayTotalArray = Object.keys(lastMonthAmountsObject)
+        .filter(key => parseInt(key, 10) >= this.state.periodStartDate)
+        .concat(Object.keys(thisMonthAmountsObject));
     }
-    this.setState(newState);
+
+    const periodTotalSpent =
+      dayTotalArray.length > 0
+        ? dayTotalArray
+            .map((k: string) =>
+              this.isThisMonth(parseInt(k, 10))
+                ? thisMonthAmountsObject[k]
+                : lastMonthAmountsObject[k]
+            )
+            .reduce((a, b) => a + b)
+        : 0;
+    return periodTotalSpent;
   };
 }
 
