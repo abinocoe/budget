@@ -29,7 +29,7 @@ class DateSelection extends Component<Props, State> {
       <>
         <CustomPicker
           options={DaysObjects}
-          onValueChange={itemValue => {
+          onValueChange={(itemValue) => {
             this.props.updateIntervalStartDate(itemValue.value);
             this.setState({ showPicker: false });
           }}

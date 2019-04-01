@@ -5,6 +5,7 @@ import { AsyncStorage, View } from "react-native";
 import {
   getDisplayDays,
   getPeriodStartMonth,
+  isDateInThisMonth,
   numberOfDaysInStartMonth
 } from "../lib/date";
 
@@ -56,7 +57,7 @@ class BudgetCalculator extends Component<{}, State> {
     let thisMonthAmountsObject = this.state.thisMonthAmountsSpent;
     let lastMonthAmountsObject = this.state.lastMonthAmountsSpent;
 
-    if (this.isThisMonth(date)) {
+    if (isDateInThisMonth(date, this.state.periodStartDate)) {
       thisMonthAmountsObject = {
         ...this.state.thisMonthAmountsSpent,
         [date]: amountSpent
@@ -199,17 +200,6 @@ class BudgetCalculator extends Component<{}, State> {
     });
   };
 
-  private isThisMonth = (dateToCheck: number) => {
-    const todaysDate = new Date().getDate();
-    if (
-      dateToCheck >= this.state.periodStartDate &&
-      todaysDate < this.state.periodStartDate
-    ) {
-      return false;
-    }
-    return true;
-  };
-
   private calculateTotalSpent = (
     thisMonthAmountsObject: any,
     lastMonthAmountsObject: any
@@ -232,7 +222,7 @@ class BudgetCalculator extends Component<{}, State> {
       dayTotalArray.length > 0
         ? dayTotalArray
             .map((k: string) =>
-              this.isThisMonth(parseInt(k, 10))
+              isDateInThisMonth(parseInt(k, 10), this.state.periodStartDate)
                 ? thisMonthAmountsObject[k]
                 : lastMonthAmountsObject[k]
             )

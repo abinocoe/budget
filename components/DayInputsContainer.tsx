@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 import { ScrollView, View } from "react-native";
 
-import { getDisplayDays, getPeriodStartMonth } from "../lib/date";
+import { getDisplayDays, getPeriodStartMonth, isDateInThisMonth } from "../lib/date";
 
 import Day from "./Day";
 
@@ -27,10 +27,7 @@ const DayInputsContainer = ({
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1, marginVertical: 30 }}>
         {days.map(date => {
-          const amountSpent =
-            date < startNumber
-              ? amountsSpentLastMonth[date]
-              : amountsSpentThisMonth[date];
+          const amountSpent = isDateInThisMonth(date, startNumber) ? amountsSpentThisMonth[date] : amountsSpentLastMonth[date];
           return (
             <Day
               amountSpent={amountSpent}
