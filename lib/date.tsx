@@ -41,8 +41,9 @@ export const getPeriodStartMonth = (startDate: number) => {
 export const getFriendlyDate = (day: number) => {
   const mutableDate = new Date();
   if (day > dateToday) {
-    mutableDate.setDate(day);
+    // must set month first to prevent rollovers
     mutableDate.setMonth(today.getMonth() - 1);
+    mutableDate.setDate(day);
   } else {
     mutableDate.setDate(day);
   }
