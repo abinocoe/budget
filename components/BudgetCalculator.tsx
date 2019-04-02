@@ -40,6 +40,18 @@ class BudgetCalculator extends Component<{}, State> {
     // TODO handle garbage collection of AsyncStorage ?
   }
 
+  public componentDidUpdate(_prevProps: {}, prevState: State) {
+    if (
+      this.state.thisMonthAmountsSpent !== prevState.thisMonthAmountsSpent ||
+      this.state.lastMonthAmountsSpent !== prevState.lastMonthAmountsSpent
+    ) {
+      this.updateTotalSpent(
+        this.state.thisMonthAmountsSpent,
+        this.state.lastMonthAmountsSpent
+      );
+    }
+  }
+
   public updatePeriodTotal = (newTotal: number) => {
     this.setState({ periodTotalAmount: newTotal }, this.storePeriodTotal);
   };
@@ -69,20 +81,13 @@ class BudgetCalculator extends Component<{}, State> {
       };
     }
 
-    const periodTotalSpent = this.calculateTotalSpent(
-      thisMonthAmountsObject,
-      lastMonthAmountsObject
-    );
-
     this.setState(
       {
-        periodTotalSpent,
         thisMonthAmountsSpent: thisMonthAmountsObject,
         lastMonthAmountsSpent: lastMonthAmountsObject
       },
       () => {
         this.storeData();
-        this.storePeriodTotal();
       }
     );
   };
@@ -160,16 +165,16 @@ class BudgetCalculator extends Component<{}, State> {
     const newState = {};
     const today = new Date();
     const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
-    // TODO this doesn't need to be stored
+
     const periodTotalAmount = await AsyncStorage.getItem("periodTotalAmount");
-    if (periodTotalAmount !== null) {
+    if (periodTotalAmount !== undefined) {
       Object.assign(newState, {
         periodTotalAmount
       });
     }
 
     const periodStartDate = await AsyncStorage.getItem("periodStartDate");
-    if (periodStartDate !== null) {
+    if (periodStartDate !== undefined) {
       Object.assign(newState, {
         periodStartDate
       });
@@ -179,28 +184,26 @@ class BudgetCalculator extends Component<{}, State> {
       `${today.getMonth()}-${today.getFullYear()}`,
       `${lastMonth.getMonth()}-${lastMonth.getFullYear()}`
     ]);
+
     const thisMonthsData = JSON.parse(totals[0][1]);
     const lastMonthsData = JSON.parse(totals[1][1]);
+
     if (thisMonthsData !== null) {
       Object.assign(newState, {
         thisMonthAmountsSpent: thisMonthsData
       });
     }
+
     if (lastMonthsData !== null) {
       Object.assign(newState, {
         lastMonthAmountsSpent: lastMonthsData
       });
     }
-    this.setState(newState, () => {
-      const periodTotalSpent = this.calculateTotalSpent(
-        this.state.thisMonthAmountsSpent,
-        this.state.lastMonthAmountsSpent
-      );
-      this.setState({ periodTotalSpent });
-    });
+
+    this.setState(newState);
   };
 
-  private calculateTotalSpent = (
+  private updateTotalSpent = (
     thisMonthAmountsObject: any,
     lastMonthAmountsObject: any
   ) => {
@@ -228,7 +231,7 @@ class BudgetCalculator extends Component<{}, State> {
             )
             .reduce((a, b) => a + b)
         : 0;
-    return periodTotalSpent;
+    this.setState({ periodTotalSpent });
   };
 }
 

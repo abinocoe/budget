@@ -10,6 +10,14 @@ import BudgetCalculator from "./BudgetCalculator";
 const currentDate = new Date();
 const nextTick = () => new Promise(resolve => setTimeout(resolve, 0));
 
+const defaultState = {
+  lastMonthAmountsSpent: {},
+  periodStartDate: 25,
+  periodTotalAmount: 50000,
+  periodTotalSpent: 0,
+  thisMonthAmountsSpent: {}
+};
+
 beforeAll(() => {
   jest.mock("AsyncStorage");
 });
@@ -37,9 +45,35 @@ it("renders correctly", async () => {
   expect(output).toMatchSnapshot();
 });
 
-it("", async () => {
+it("retrieves data on mount", async () => {
   shallow(<BudgetCalculator />);
   await nextTick();
   expect(AsyncStorage.multiGet).toHaveBeenCalledTimes(1);
   expect(AsyncStorage.getItem).toHaveBeenCalledTimes(2);
+});
+
+it("recalculates total amount spent when state updates", async () => {
+  const multiGetMock = jest.spyOn(AsyncStorage, "multiGet");
+  multiGetMock.mockImplementationOnce(() =>
+    Promise.resolve([
+      ["2-2019", '{ "1": 1000, "2": 1000 }'],
+      ["1-2019", '{ "31": 1000, "30": 1000 }']
+    ] as [string, string][])
+  );
+  const output = shallow(<BudgetCalculator />);
+  expect(output.state()).toEqual(defaultState);
+  await nextTick();
+  expect(output.state()).toEqual({
+    ...defaultState,
+    lastMonthAmountsSpent: {
+      "30": 1000,
+      "31": 1000
+    },
+    periodStartDate: 25,
+    periodTotalSpent: 4000,
+    thisMonthAmountsSpent: {
+      "1": 1000,
+      "2": 1000
+    }
+  });
 });
