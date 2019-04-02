@@ -10,14 +10,6 @@ import BudgetCalculator from "./BudgetCalculator";
 const currentDate = new Date();
 const nextTick = () => new Promise(resolve => setTimeout(resolve, 0));
 
-const defaultState = {
-  lastMonthAmountsSpent: {},
-  periodStartDate: 25,
-  periodTotalAmount: 50000,
-  periodTotalSpent: 0,
-  thisMonthAmountsSpent: {}
-};
-
 beforeAll(() => {
   jest.mock("AsyncStorage");
 });
@@ -61,19 +53,7 @@ it("recalculates total amount spent when state updates", async () => {
     ] as [string, string][])
   );
   const output = shallow(<BudgetCalculator />);
-  expect(output.state()).toEqual(defaultState);
+  expect(output.state("periodTotalSpent")).toEqual(0);
   await nextTick();
-  expect(output.state()).toEqual({
-    ...defaultState,
-    lastMonthAmountsSpent: {
-      "30": 1000,
-      "31": 1000
-    },
-    periodStartDate: 25,
-    periodTotalSpent: 4000,
-    thisMonthAmountsSpent: {
-      "1": 1000,
-      "2": 1000
-    }
-  });
+  expect(output.state("periodTotalSpent")).toEqual(4000);
 });
