@@ -1,4 +1,5 @@
 import { shallow } from "enzyme";
+import toJson from "enzyme-to-json";
 import React from "react";
 import { AsyncStorage } from "react-native";
 
@@ -34,7 +35,7 @@ it("renders correctly", async () => {
   dateToday = 25;
   await nextTick();
   const output = shallow(<BudgetCalculator />);
-  expect(output).toMatchSnapshot();
+  expect(toJson(output)).toMatchSnapshot();
 });
 
 it("retrieves data on mount", async () => {
