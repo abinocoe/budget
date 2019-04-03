@@ -15,15 +15,7 @@ interface Props {
   intervalStartDate: number;
 }
 
-interface State {
-  showPicker: boolean;
-}
-
-class DateSelection extends Component<Props, State> {
-  public state: Readonly<State> = {
-    showPicker: false
-  };
-
+class DateSelection extends Component<Props> {
   public render() {
     return (
       <>
@@ -31,7 +23,6 @@ class DateSelection extends Component<Props, State> {
           options={DaysObjects}
           onValueChange={itemValue => {
             this.props.updateIntervalStartDate(itemValue.value);
-            this.setState({ showPicker: false });
           }}
           fieldTemplate={() => {
             return (
