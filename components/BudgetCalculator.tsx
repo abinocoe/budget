@@ -28,7 +28,7 @@ class BudgetCalculator extends Component<{}, State> {
       lastMonthAmountsSpent: {},
       periodTotalAmount: 50000,
       periodTotalSpent: 0,
-      periodStartDate: 25
+      periodStartDate: 1
     };
     this.updatePeriodTotal.bind(this);
     this.updateDayAmountSpent.bind(this);
@@ -37,7 +37,6 @@ class BudgetCalculator extends Component<{}, State> {
 
   public componentWillMount() {
     this.fetchData();
-    // TODO handle garbage collection of AsyncStorage ?
   }
 
   public componentDidUpdate(_prevProps: {}, prevState: State) {
@@ -167,14 +166,14 @@ class BudgetCalculator extends Component<{}, State> {
     const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
 
     const periodTotalAmount = await AsyncStorage.getItem("periodTotalAmount");
-    if (periodTotalAmount !== undefined) {
+    if (periodTotalAmount !== null) {
       Object.assign(newState, {
         periodTotalAmount
       });
     }
 
     const periodStartDate = await AsyncStorage.getItem("periodStartDate");
-    if (periodStartDate !== undefined) {
+    if (periodStartDate !== null) {
       Object.assign(newState, {
         periodStartDate
       });
