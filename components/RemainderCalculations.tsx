@@ -30,7 +30,8 @@ const RemainderCalculations = ({
   const amountRemaining = totalAllowance - totalSpent;
   const decimalise = (amount: number) => (amount / 100).toFixed(2);
   const creditOrDebitAmount =
-    (totalAllowance / (daysRemaining + (daysElapsed - 1))) * daysElapsed -
+    // daysRemaining includes an extra day to always include the current day
+    (totalAllowance / (daysRemaining + 1 + daysElapsed)) * daysElapsed -
     totalSpent;
   return (
     <View
