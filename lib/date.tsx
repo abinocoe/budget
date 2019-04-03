@@ -52,10 +52,7 @@ export const getFriendlyDate = (day: number) => {
 
 export const isDateInThisMonth = (dateToCheck: number, periodStart: number) => {
   const todaysDate = new Date().getDate();
-  if (
-    dateToCheck >= periodStart &&
-    todaysDate < periodStart
-  ) {
+  if (dateToCheck >= periodStart && todaysDate < periodStart) {
     return false;
   }
   return true;
