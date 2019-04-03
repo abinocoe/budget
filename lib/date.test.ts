@@ -105,6 +105,15 @@ describe("getFriendlyDate", () => {
     // @ts-ignore;
     dateToday = 4;
     today.setMonth(0);
+    today.setFullYear(2019);
     expect(getFriendlyDate(27)).toEqual("Thu 27th");
+  });
+
+  it("does not rollover to incorrect month when called for the 31st", () => {
+    // @ts-ignore;
+    dateToday = 4;
+    today.setMonth(3);
+    today.setFullYear(2019);
+    expect(getFriendlyDate(31)).toEqual("Sun 31st");
   });
 });
