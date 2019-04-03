@@ -2,6 +2,8 @@ import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
 import React from "react";
 
+import DateSelection from "./DateSelection";
+import PeriodAllowanceInput from "./PeriodAllowance";
 import RemainderCalculations from "./RemainderCalculations";
 
 describe("RemainderCalculations", () => {
@@ -92,5 +94,43 @@ describe("RemainderCalculations", () => {
       node => node.prop("testID") === "totalRemain"
     );
     expect(amountRemaining.first().prop("children")).toEqual("100.00");
+  });
+
+  it("responds to total allowance update from child", () => {
+    const allowanceUpdateSpy = jest.fn();
+    const output = shallow(
+      <RemainderCalculations
+        dailyAllowance={1000}
+        daysElapsed={10}
+        daysRemaining={22}
+        intervalStartDate={25}
+        totalAllowance={31000}
+        totalSpent={21000}
+        updateAllowance={allowanceUpdateSpy}
+        updateIntervalStartDate={() => null}
+      />
+    );
+    output.find(PeriodAllowanceInput).prop("updateAllowance")(30000);
+    expect(allowanceUpdateSpy).toHaveBeenCalledTimes(1);
+    expect(allowanceUpdateSpy).toHaveBeenLastCalledWith(30000);
+  });
+
+  it("responds to interval start date update from child", () => {
+    const intervalUpdateSpy = jest.fn();
+    const output = shallow(
+      <RemainderCalculations
+        dailyAllowance={1000}
+        daysElapsed={10}
+        daysRemaining={22}
+        intervalStartDate={25}
+        totalAllowance={31000}
+        totalSpent={21000}
+        updateAllowance={() => null}
+        updateIntervalStartDate={intervalUpdateSpy}
+      />
+    );
+    output.find(DateSelection).prop("updateIntervalStartDate")(10);
+    expect(intervalUpdateSpy).toHaveBeenCalledTimes(1);
+    expect(intervalUpdateSpy).toHaveBeenLastCalledWith(10);
   });
 });
