@@ -11,9 +11,9 @@ exports[`renders correctly 1`] = `
 >
   <RemainderCalculations
     dailyAllowance={1613}
-    daysElapsed={1}
-    daysRemaining={31}
-    intervalStartDate={25}
+    daysElapsed={25}
+    daysRemaining={7}
+    intervalStartDate={1}
     totalAllowance={50000}
     totalSpent={0}
     updateAllowance={[Function]}
@@ -22,7 +22,7 @@ exports[`renders correctly 1`] = `
   <DayInputsContainer
     amountsSpentLastMonth={Object {}}
     amountsSpentThisMonth={Object {}}
-    startNumber={25}
+    startNumber={1}
     updateAmountSpent={[Function]}
   />
 </View>

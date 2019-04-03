@@ -7,6 +7,8 @@ import { AsyncStorage } from "react-native";
 import { dateToday, today } from "../lib/date";
 
 import BudgetCalculator from "./BudgetCalculator";
+import DayInputsContainer from "./DayInputsContainer";
+import RemainderCalculations from "./RemainderCalculations";
 
 const currentDate = new Date();
 const nextTick = () => new Promise(resolve => setTimeout(resolve, 0));
@@ -46,6 +48,10 @@ it("retrieves data on mount", async () => {
 });
 
 it("recalculates total amount spent when state updates", async () => {
+  jest
+    .spyOn(AsyncStorage, "getItem")
+    .mockImplementationOnce(() => Promise.resolve("50000"))
+    .mockImplementationOnce(() => Promise.resolve("25"));
   const multiGetMock = jest.spyOn(AsyncStorage, "multiGet");
   multiGetMock.mockImplementationOnce(() =>
     Promise.resolve([
@@ -57,4 +63,47 @@ it("recalculates total amount spent when state updates", async () => {
   expect(output.state("periodTotalSpent")).toEqual(0);
   await nextTick();
   expect(output.state("periodTotalSpent")).toEqual(4000);
+});
+
+describe("updatePeriodTotal", () => {
+  it("handles period allowance update from child", async () => {
+    const output = shallow(<BudgetCalculator />);
+    await nextTick();
+    output.find(RemainderCalculations).prop("updateAllowance")(40000);
+    expect(output.state("periodTotalAmount")).toEqual(40000);
+  });
+});
+
+describe("updatePeriodStart", () => {
+  it("handles period start date update from child", async () => {
+    const output = shallow(<BudgetCalculator />);
+    await nextTick();
+    expect(output.state("periodStartDate")).toEqual(1);
+    output.find(RemainderCalculations).prop("updateIntervalStartDate")(5);
+    expect(output.state("periodStartDate")).toEqual(5);
+  });
+});
+
+describe("updateDayAmountSpent", () => {
+  it("handles amount spent update for a specific day from a child", async () => {
+    today.setDate(3);
+    jest
+      .spyOn(AsyncStorage, "getItem")
+      .mockImplementationOnce(() => Promise.resolve("50000"))
+      .mockImplementationOnce(() => Promise.resolve("25"));
+    const multiGetMock = jest.spyOn(AsyncStorage, "multiGet");
+    multiGetMock.mockImplementationOnce(() =>
+      Promise.resolve([
+        ["2-2019", '{ "1": 1000, "2": 1000 }'],
+        ["1-2019", '{ "31": 1000, "30": 1000 }']
+      ] as [string, string][])
+    );
+    const output = shallow(<BudgetCalculator />);
+    await nextTick();
+    output.find(DayInputsContainer).prop("updateAmountSpent")(500, 31);
+    expect(output.state("lastMonthAmountsSpent")).toEqual({
+      31: 500,
+      30: 1000
+    });
+  });
 });
