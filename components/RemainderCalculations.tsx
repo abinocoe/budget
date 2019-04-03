@@ -29,9 +29,10 @@ const RemainderCalculations = ({
 }: Props) => {
   const amountRemaining = totalAllowance - totalSpent;
   const decimalise = (amount: number) => (amount / 100).toFixed(2);
+
   const creditOrDebitAmount =
     // daysRemaining includes an extra day to always include the current day
-    (totalAllowance / (daysRemaining + 1 + daysElapsed)) * daysElapsed -
+    (totalAllowance / (daysRemaining - 1 + daysElapsed)) * daysElapsed -
     totalSpent;
   return (
     <View
@@ -47,7 +48,10 @@ const RemainderCalculations = ({
           updateAllowance={updateAllowance}
         />
         <View style={{ alignItems: "center" }}>
-          <Text style={[styles.largeText, { backgroundColor: colours.purple }]}>
+          <Text
+            style={[styles.largeText, { backgroundColor: colours.purple }]}
+            testID="totalRemain"
+          >
             {decimalise(amountRemaining)}
           </Text>
           <Text style={styles.smallText}>Total remaining</Text>
@@ -65,13 +69,19 @@ const RemainderCalculations = ({
           <Text style={styles.smallText}>Daily allowance</Text>
         </View>
         <View style={{ alignItems: "center" }}>
-          <Text style={[styles.largeText, { backgroundColor: colours.yellow }]}>
+          <Text
+            style={[styles.largeText, { backgroundColor: colours.yellow }]}
+            testID="averageRemain"
+          >
             {decimalise(amountRemaining / daysRemaining)}
           </Text>
           <Text style={styles.smallText}>Average per day remain</Text>
         </View>
         <View style={{ alignItems: "center" }}>
-          <Text style={[styles.largeText, { backgroundColor: colours.orange }]}>
+          <Text
+            style={[styles.largeText, { backgroundColor: colours.orange }]}
+            testID="amountDebit"
+          >
             {decimalise(
               Math.abs(parseFloat((creditOrDebitAmount / 100).toFixed(2))) === 0
                 ? Math.abs(creditOrDebitAmount)
