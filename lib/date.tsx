@@ -1,7 +1,6 @@
 import _ from "lodash";
 
 export const today = new Date();
-export const dateToday = today.getDate();
 
 const dayStrings = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -14,6 +13,7 @@ export const numberOfDaysInStartMonth = (startMonth: number) =>
   ).getDate();
 
 export const getDisplayDays = (startDate: number, startMonth: number) => {
+  const dateToday = today.getDate();
   let days: number[];
   if (dateToday < startDate) {
     days = [
@@ -31,6 +31,7 @@ export const getDisplayDays = (startDate: number, startMonth: number) => {
 
 export const getPeriodStartMonth = (startDate: number) => {
   const thisMonth = today.getMonth();
+  const dateToday = today.getDate();
   return dateToday >= startDate
     ? thisMonth
     : thisMonth === 0
@@ -39,6 +40,7 @@ export const getPeriodStartMonth = (startDate: number) => {
 };
 
 export const getFriendlyDate = (day: number) => {
+  const dateToday = today.getDate();
   const mutableDate = new Date();
   if (day > dateToday) {
     // must set month first to prevent rollovers
@@ -51,8 +53,8 @@ export const getFriendlyDate = (day: number) => {
 };
 
 export const isDateInThisMonth = (dateToCheck: number, periodStart: number) => {
-  const todaysDate = new Date().getDate();
-  if (dateToCheck >= periodStart && todaysDate < periodStart) {
+  const dateToday = today.getDate();
+  if (dateToCheck >= periodStart && dateToday < periodStart) {
     return false;
   }
   return true;

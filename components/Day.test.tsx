@@ -2,8 +2,7 @@ import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
 import React from "react";
 
-// @ts-ignore
-import { dateToday, today } from "../lib/date";
+import { today } from "../lib/date";
 
 import Day from "./Day";
 

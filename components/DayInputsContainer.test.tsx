@@ -2,8 +2,7 @@ import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
 import React from "react";
 
-// @ts-ignore
-import { dateToday, today } from "../lib/date";
+import { today } from "../lib/date";
 
 import Day from "./Day";
 import DayInputsContainer from "./DayInputsContainer";
@@ -14,14 +13,11 @@ afterEach(() => {
   today.setDate(currentDate.getDate());
   today.setMonth(currentDate.getMonth());
   today.setFullYear(currentDate.getFullYear());
-  // @ts-ignore
-  dateToday = today.getDate();
 });
 
 describe("DayInputsContainer", () => {
   it("renders correctly", () => {
-    // @ts-ignore
-    dateToday = 4;
+    today.setDate(4);
     today.setMonth(3);
     const output = shallow(
       <DayInputsContainer

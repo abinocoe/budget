@@ -77,7 +77,6 @@ exports[`Day renders correctly on the 3rd of April 2019 with the input showing 1
         onEndEditing={[Function]}
         placeholder="1.00"
         placeholderTextColor="#A9A9A9"
-        testID="input"
         value=""
       />
     </View>
