@@ -2,8 +2,6 @@ import _ from "lodash";
 
 export const today = new Date();
 
-const dayStrings = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
 export const numberOfDaysInStartMonth = (startMonth: number) =>
   32 -
   new Date(
@@ -40,6 +38,7 @@ export const getPeriodStartMonth = (startDate: number) => {
 };
 
 export const getFriendlyDate = (day: number) => {
+  const dayStrings = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const dateToday = today.getDate();
   const mutableDate = new Date();
   if (day > dateToday) {
