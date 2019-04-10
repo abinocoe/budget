@@ -20,8 +20,8 @@ exports[`renders correctly 1`] = `
     updateIntervalStartDate={[Function]}
   />
   <DayInputsContainer
-    amountsSpentLastMonth={Object {}}
-    amountsSpentThisMonth={Object {}}
+    amountsSpentPeriodEndMonth={Object {}}
+    amountsSpentPeriodStartMonth={Object {}}
     startNumber={1}
     updateAmountSpent={[Function]}
   />

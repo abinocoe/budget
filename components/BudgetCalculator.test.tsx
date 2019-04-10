@@ -82,6 +82,8 @@ describe("updatePeriodStart", () => {
 describe("updateDayAmountSpent", () => {
   it("handles amount spent update for a specific day from a child", async () => {
     today.setDate(3);
+    today.setMonth(3);
+    today.setFullYear(2019);
     jest
       .spyOn(AsyncStorage, "getItem")
       .mockImplementationOnce(() => Promise.resolve("50000"))
@@ -96,7 +98,8 @@ describe("updateDayAmountSpent", () => {
     const output = shallow(<BudgetCalculator />);
     await nextTick();
     output.find(DayInputsContainer).prop("updateAmountSpent")(500, 31);
-    expect(output.state("lastMonthAmountsSpent")).toEqual({
+
+    expect(output.state("periodStartMonthAmountsSpent")).toEqual({
       31: 500,
       30: 1000
     });

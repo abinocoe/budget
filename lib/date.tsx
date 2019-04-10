@@ -51,12 +51,11 @@ export const getFriendlyDate = (day: number) => {
   return `${dayStrings[mutableDate.getDay()]} ${day}${getOrdinal(day)}`;
 };
 
-export const isDateInThisMonth = (dateToCheck: number, periodStart: number) => {
-  const dateToday = today.getDate();
-  if (dateToCheck >= periodStart && dateToday < periodStart) {
-    return false;
-  }
-  return true;
+export const isDateInPeriodStartMonth = (
+  dateToCheck: number,
+  periodStart: number
+) => {
+  return dateToCheck >= periodStart ? true : false;
 };
 
 const getOrdinal = (day: number) => {

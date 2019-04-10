@@ -21,8 +21,8 @@ describe("DayInputsContainer", () => {
     today.setMonth(3);
     const output = shallow(
       <DayInputsContainer
-        amountsSpentThisMonth={{ 1: 1000, 2: 1000, 3: 433 }}
-        amountsSpentLastMonth={{ 30: 1000, 31: 1000 }}
+        amountsSpentPeriodStartMonth={{ 30: 1000, 31: 1000 }}
+        amountsSpentPeriodEndMonth={{ 1: 1000, 2: 1000, 3: 433 }}
         startNumber={10}
         updateAmountSpent={() => null}
       />
@@ -34,8 +34,8 @@ describe("DayInputsContainer", () => {
     const amountSpentUpdateSpy = jest.fn();
     const output = shallow(
       <DayInputsContainer
-        amountsSpentThisMonth={{ 1: 1000, 2: 1000, 3: 433 }}
-        amountsSpentLastMonth={{ 30: 1000, 31: 1000 }}
+        amountsSpentPeriodStartMonth={{ 30: 1000, 31: 1000 }}
+        amountsSpentPeriodEndMonth={{ 1: 1000, 2: 1000, 3: 433 }}
         startNumber={10}
         updateAmountSpent={amountSpentUpdateSpy}
       />

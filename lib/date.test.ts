@@ -2,7 +2,7 @@ import {
   getDisplayDays,
   getFriendlyDate,
   getPeriodStartMonth,
-  isDateInThisMonth,
+  isDateInPeriodStartMonth,
   numberOfDaysInStartMonth,
   today
 } from "./date";
@@ -106,28 +106,19 @@ describe("getFriendlyDate", () => {
   });
 });
 
-describe("isDateInThisMonth (relative to period start date)", () => {
-  it("returns true for 22nd on the 26th where the period start date is 25", () => {
-    today.setDate(26);
-    const output = isDateInThisMonth(22, 25);
+describe("isDateInPeriodStartMonth (relative to period start date)", () => {
+  it("returns false for 22nd where the period start date is 25", () => {
+    const output = isDateInPeriodStartMonth(22, 25);
+    expect(output).toEqual(false);
+  });
+
+  it("returns true for 22nd where the period start date is 12", () => {
+    const output = isDateInPeriodStartMonth(22, 12);
     expect(output).toEqual(true);
   });
 
-  it("returns true for 22nd on the 6th where the period start date is 25", () => {
-    today.setDate(6);
-    const output = isDateInThisMonth(22, 25);
-    expect(output).toEqual(true);
-  });
-
-  it("returns true for 22nd on the 26th where the period start date is 12", () => {
-    today.setDate(26);
-    const output = isDateInThisMonth(22, 12);
-    expect(output).toEqual(true);
-  });
-
-  it("returns false for 22nd on the 6th where the period start date is 12", () => {
-    today.setDate(6);
-    const output = isDateInThisMonth(22, 12);
+  it("returns false for 2nd where the period start date is 22", () => {
+    const output = isDateInPeriodStartMonth(2, 22);
     expect(output).toEqual(false);
   });
 });
