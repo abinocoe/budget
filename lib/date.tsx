@@ -1,9 +1,6 @@
 import _ from "lodash";
 
 export const today = new Date();
-export const dateToday = today.getDate();
-
-const dayStrings = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export const numberOfDaysInStartMonth = (startMonth: number) =>
   32 -
@@ -14,6 +11,7 @@ export const numberOfDaysInStartMonth = (startMonth: number) =>
   ).getDate();
 
 export const getDisplayDays = (startDate: number, startMonth: number) => {
+  const dateToday = today.getDate();
   let days: number[];
   if (dateToday < startDate) {
     days = [
@@ -31,6 +29,7 @@ export const getDisplayDays = (startDate: number, startMonth: number) => {
 
 export const getPeriodStartMonth = (startDate: number) => {
   const thisMonth = today.getMonth();
+  const dateToday = today.getDate();
   return dateToday >= startDate
     ? thisMonth
     : thisMonth === 0
@@ -39,25 +38,24 @@ export const getPeriodStartMonth = (startDate: number) => {
 };
 
 export const getFriendlyDate = (day: number) => {
+  const dayStrings = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const dateToday = today.getDate();
   const mutableDate = new Date();
   if (day > dateToday) {
-    mutableDate.setDate(day);
+    // must set month first to prevent rollovers
     mutableDate.setMonth(today.getMonth() - 1);
+    mutableDate.setDate(day);
   } else {
     mutableDate.setDate(day);
   }
   return `${dayStrings[mutableDate.getDay()]} ${day}${getOrdinal(day)}`;
 };
 
-export const isDateInThisMonth = (dateToCheck: number, periodStart: number) => {
-  const todaysDate = new Date().getDate();
-  if (
-    dateToCheck >= periodStart &&
-    todaysDate < periodStart
-  ) {
-    return false;
-  }
-  return true;
+export const isDateInPeriodStartMonth = (
+  dateToCheck: number,
+  periodStart: number
+) => {
+  return dateToCheck >= periodStart ? true : false;
 };
 
 const getOrdinal = (day: number) => {

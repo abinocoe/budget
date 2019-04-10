@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PeriodAllowance renders correctly 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "backgroundColor": "#EC407A",
+            "borderRadius": 5,
+            "color": "white",
+            "elevation": 3,
+            "fontSize": 30,
+            "marginBottom": 5,
+            "marginTop": 10,
+            "paddingHorizontal": 5,
+            "textAlign": "center",
+            "width": "90%",
+          }
+        }
+      >
+        500.00
+      </Text>
+    </View>
+  </TouchableOpacity>
+  <Text
+    style={
+      Object {
+        "fontSize": 12,
+      }
+    }
+  >
+    Total amount this month
+  </Text>
+</View>
+`;
+
+exports[`PeriodAllowance renders input correctly 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+      }
+    }
+  >
+    <ForwardRef(Themed.Input)
+      autoFocus={true}
+      containerStyle={
+        Object {
+          "backgroundColor": "pink",
+          "borderRadius": 5,
+          "elevation": 2,
+          "height": 40,
+          "marginBottom": 5,
+          "marginTop": 10,
+          "width": "90%",
+        }
+      }
+      inputContainerStyle={
+        Object {
+          "borderBottomColor": "rgba(0,0,0,0)",
+        }
+      }
+      inputStyle={
+        Object {
+          "borderColor": "transparent",
+          "color": "white",
+          "fontSize": 30,
+          "padding": 0,
+          "paddingRight": 5,
+          "textAlign": "right",
+        }
+      }
+      keyboardType="number-pad"
+      onChangeText={[Function]}
+      onEndEditing={[Function]}
+      placeholder="500.00"
+      placeholderTextColor="white"
+      style={
+        Object {
+          "color": "white",
+        }
+      }
+      testID="input"
+      value=""
+    />
+  </View>
+  <Text
+    style={
+      Object {
+        "fontSize": 12,
+      }
+    }
+  >
+    Total amount this month
+  </Text>
+</View>
+`;
