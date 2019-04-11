@@ -91,7 +91,7 @@ class PeriodAllowanceInput extends Component<Props> {
                 backgroundColor: "pink",
                 width: "90%",
                 borderRadius: 5,
-                elevation: 2,
+                elevation: 3,
                 height: 40
               }}
               style={{ color: "white" }}
