@@ -46,6 +46,7 @@ export const getFriendlyDate = (day: number) => {
     mutableDate.setMonth(today.getMonth() - 1);
     mutableDate.setDate(day);
   } else {
+    mutableDate.setMonth(today.getMonth());
     mutableDate.setDate(day);
   }
   return `${dayStrings[mutableDate.getDay()]} ${day}${getOrdinal(day)}`;

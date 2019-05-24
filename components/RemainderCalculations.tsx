@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Modal from "react-native-modal";
 
 import * as colours from "../constants/colours";
 
 import DateSelection from "./DateSelection";
 import PeriodAllowanceInput from "./PeriodAllowance";
+import TooltipModal from "./TooltipModal";
 
 interface Props {
   dailyAllowance: number;
@@ -21,6 +21,7 @@ interface Props {
 interface State {
   showModal: boolean;
   modalContent: string;
+  modalTitle: string;
 }
 
 class RemainderCalculations extends Component<Props, State> {
@@ -29,16 +30,22 @@ class RemainderCalculations extends Component<Props, State> {
 
     this.state = {
       showModal: false,
-      modalContent: ""
+      modalContent: "",
+      modalTitle: ""
     };
+    this.showModal.bind(this);
   }
 
-  public showModal = (contentString: string) => {
-    this.setState({ showModal: true, modalContent: contentString });
+  public showModal = (title: string, description: string) => {
+    this.setState({
+      showModal: true,
+      modalTitle: title,
+      modalContent: description
+    });
   };
 
   public hideModal = () => {
-    this.setState({ showModal: false, modalContent: "" });
+    this.setState({ showModal: false, modalTitle: "", modalContent: "" });
   };
 
   public render() {
@@ -76,6 +83,7 @@ class RemainderCalculations extends Component<Props, State> {
             <Text
               onPress={() =>
                 this.showModal(
+                  "Total remaining",
                   "Your total allowance for this month minus the total you've spent so far"
                 )
               }
@@ -96,7 +104,8 @@ class RemainderCalculations extends Component<Props, State> {
             <Text
               onPress={() =>
                 this.showModal(
-                  "Your total allowance divided by the number of days in the start month"
+                  "Daily allowance",
+                  "Your total allowance divided by the number of days in the month"
                 )
               }
               style={[styles.largeText, { backgroundColor: colours.green }]}
@@ -109,6 +118,7 @@ class RemainderCalculations extends Component<Props, State> {
             <Text
               onPress={() =>
                 this.showModal(
+                  "Average per day remain",
                   "The total amount remaining divided by the number of days remaining (including today)"
                 )
               }
@@ -123,6 +133,7 @@ class RemainderCalculations extends Component<Props, State> {
             <Text
               onPress={() =>
                 this.showModal(
+                  "Average per day remain",
                   "Your total allowance for the days elapsed so far, minus the total spent"
                 )
               }
@@ -143,21 +154,12 @@ class RemainderCalculations extends Component<Props, State> {
             </Text>
           </View>
         </View>
-        <Modal
+        <TooltipModal
           isVisible={this.state.showModal}
-          onBackButtonPress={this.hideModal}
-          onBackdropPress={this.hideModal}
-        >
-          <View
-            style={{
-              backgroundColor: "white",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Text>{this.state.modalContent}</Text>
-          </View>
-        </Modal>
+          title={this.state.modalTitle}
+          description={this.state.modalContent}
+          hideModal={this.hideModal}
+        />
       </View>
     );
   }
