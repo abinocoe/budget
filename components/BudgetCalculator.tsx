@@ -1,6 +1,7 @@
+import AsyncStorage from "@react-native-community/async-storage";
 import _ from "lodash";
 import React, { Component } from "react";
-import { AsyncStorage, View } from "react-native";
+import { View } from "react-native";
 
 import {
   getDisplayDays,
@@ -30,9 +31,6 @@ class BudgetCalculator extends Component<{}, State> {
       periodTotalSpent: 0,
       periodStartDate: 1
     };
-    this.updatePeriodTotal.bind(this);
-    this.updateDayAmountSpent.bind(this);
-    this.updatePeriodStart.bind(this);
   }
 
   public componentWillMount() {
@@ -217,8 +215,9 @@ class BudgetCalculator extends Component<{}, State> {
       `${today.getMonth()}-${today.getFullYear()}`,
       `${lastMonth.getMonth()}-${lastMonth.getFullYear()}`
     ]);
-
+    // @ts-ignore
     const thisMonthsData = JSON.parse(totals[0][1]);
+    // @ts-ignore
     const lastMonthsData = JSON.parse(totals[1][1]);
     if (isTodayInPeriodStartMonth) {
       if (thisMonthsData !== null) {
