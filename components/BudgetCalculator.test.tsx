@@ -1,7 +1,7 @@
+import AsyncStorage from "@react-native-community/async-storage";
 import { shallow } from "enzyme";
 import toJson from "enzyme-to-json";
 import React from "react";
-import { AsyncStorage } from "react-native";
 
 import { today } from "../lib/date";
 
@@ -12,9 +12,9 @@ import RemainderCalculations from "./RemainderCalculations";
 const currentDate = new Date();
 const nextTick = () => new Promise(resolve => setTimeout(resolve, 0));
 
-beforeAll(() => {
-  jest.mock("AsyncStorage");
-});
+// beforeAll(() => {
+//   jest.mock("AsyncStorage");
+// });
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -36,10 +36,19 @@ it("renders correctly", async () => {
 });
 
 it("retrieves data on mount", async () => {
+  const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+
   shallow(<BudgetCalculator />);
   await nextTick();
-  expect(AsyncStorage.multiGet).toHaveBeenCalledTimes(1);
+  // n.b. under the hood, multiGet is called every time getItem is called
+  expect(AsyncStorage.multiGet).toHaveBeenCalledTimes(3);
   expect(AsyncStorage.getItem).toHaveBeenCalledTimes(2);
+  expect(AsyncStorage.getItem).toBeCalledWith("periodStartDate");
+  expect(AsyncStorage.getItem).toBeCalledWith("periodTotalAmount");
+  expect(AsyncStorage.multiGet).toBeCalledWith([
+    `${today.getMonth()}-${today.getFullYear()}`,
+    `${lastMonth.getMonth()}-${lastMonth.getFullYear()}`
+  ]);
 });
 
 it("recalculates total amount spent when state updates", async () => {
