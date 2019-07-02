@@ -56,9 +56,6 @@ class Day extends Component<Props, State> {
   }
 
   public render() {
-    console.log("******");
-    // console.log(this.props.date);
-    // console.log(getFriendlyDate(this.props.date));
     return (
       <ListItem
         title={getFriendlyDate(this.props.date)}
