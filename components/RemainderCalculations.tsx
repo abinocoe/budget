@@ -66,6 +66,11 @@ class RemainderCalculations extends Component<Props, State> {
       // daysRemaining includes an extra day to always include the current day
       (totalAllowance / (daysRemaining - 1 + daysElapsed)) * daysElapsed -
       totalSpent;
+
+    const creditOrDebitTitle =
+      parseFloat(decimalise(creditOrDebitAmount)) >= -0
+        ? `Amount credit`
+        : `Amount debit`;
     return (
       <View
         style={{
@@ -133,7 +138,7 @@ class RemainderCalculations extends Component<Props, State> {
             <Text
               onPress={() =>
                 this.showModal(
-                  "Average per day remain",
+                  creditOrDebitTitle,
                   "Your total allowance for the days elapsed so far, minus the total spent"
                 )
               }
@@ -147,11 +152,7 @@ class RemainderCalculations extends Component<Props, State> {
                   : creditOrDebitAmount
               )}
             </Text>
-            <Text style={styles.smallText}>
-              {parseFloat(decimalise(creditOrDebitAmount)) >= -0
-                ? `Amount credit`
-                : `Amount debit`}
-            </Text>
+            <Text style={styles.smallText}>{creditOrDebitTitle}</Text>
           </View>
         </View>
         <TooltipModal
