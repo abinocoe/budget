@@ -40,15 +40,31 @@ export const getPeriodStartMonth = (startDate: number) => {
 export const getFriendlyDate = (day: number) => {
   const dayStrings = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const dateToday = today.getDate();
-  const mutableDate = new Date();
+  const mutableDate = today;
+  // console.log("&&&&&&&&&");
+
+  // console.log(day);
+  // console.log(today.getMonth());
+  // console.log(today.getFullYear());
+  console.log(day > dateToday);
+  console.log(dateToday);
+  // console.log("&&&&&&&&&");
+  console.log(today.getMonth());
   if (day > dateToday) {
     // must set month first to prevent rollovers
+    console.log("if", today.getMonth() - 1);
     mutableDate.setMonth(today.getMonth() - 1);
     mutableDate.setDate(day);
   } else {
+    console.log("else", today.getMonth());
     mutableDate.setMonth(today.getMonth());
     mutableDate.setDate(day);
   }
+  console.log(mutableDate.getDay());
+  console.log(mutableDate.getDate());
+  console.log(mutableDate.getMonth());
+  console.log(mutableDate.getFullYear());
+  console.log(dayStrings[mutableDate.getDay()]);
   return `${dayStrings[mutableDate.getDay()]} ${day}${getOrdinal(day)}`;
 };
 

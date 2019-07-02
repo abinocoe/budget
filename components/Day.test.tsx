@@ -15,7 +15,8 @@ afterEach(() => {
 });
 
 describe("Day", () => {
-  it("renders correctly on the 3rd of April 2019", () => {
+  it("renders correctly for the 3rd on the 4th of April 2019", () => {
+    today.setDate(4);
     today.setMonth(3);
     today.setFullYear(2019);
     const output = shallow(
@@ -24,11 +25,33 @@ describe("Day", () => {
     expect(toJson(output)).toMatchSnapshot();
   });
 
-  it("renders correctly on the 3rd of April 2019 with the input showing", () => {
+  it("renders correctly for the 5th on the 4th of April 2019", () => {
+    today.setDate(4);
+    today.setMonth(3);
+    today.setFullYear(2019);
+    const output = shallow(
+      <Day date={5} amountSpent={100} updateAmountSpent={() => null} />
+    );
+    expect(toJson(output)).toMatchSnapshot();
+  });
+
+  it("renders correctly for the 3rd on the 4th of April 2019 with the input showing", () => {
+    today.setDate(4);
     today.setMonth(3);
     today.setFullYear(2019);
     const output = shallow(
       <Day date={3} amountSpent={100} updateAmountSpent={() => null} />
+    );
+    output.setState({ editable: true });
+    expect(toJson(output)).toMatchSnapshot();
+  });
+
+  it("renders correctly for the 5th on the 4th of April 2019 with the input showing", () => {
+    today.setDate(4);
+    today.setMonth(3);
+    today.setFullYear(2019);
+    const output = shallow(
+      <Day date={5} amountSpent={100} updateAmountSpent={() => null} />
     );
     output.setState({ editable: true });
     expect(toJson(output)).toMatchSnapshot();

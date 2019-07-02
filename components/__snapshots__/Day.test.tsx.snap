@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Day renders correctly on the 3rd of April 2019 1`] = `
+exports[`Day renders correctly for the 3rd of April 2019 on the 4th 1`] = `
 <Themed.ListItem
   rightElement={
     <View
@@ -34,7 +34,7 @@ exports[`Day renders correctly on the 3rd of April 2019 1`] = `
 />
 `;
 
-exports[`Day renders correctly on the 3rd of April 2019 with the input showing 1`] = `
+exports[`Day renders correctly for the 3rd of April 2019 on the 4th with the input showing 1`] = `
 <Themed.ListItem
   rightElement={
     <View
@@ -82,5 +82,175 @@ exports[`Day renders correctly on the 3rd of April 2019 with the input showing 1
     </View>
   }
   title="Wed 3rd"
+/>
+`;
+
+exports[`Day renders correctly for the 3rd on the 4th of April 2019 1`] = `
+<Themed.ListItem
+  rightElement={
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "borderColor": "pink",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "height": 44,
+          "justifyContent": "center",
+          "paddingRight": 5,
+          "width": 100,
+        }
+      }
+    >
+      <Themed.Text
+        onPress={[Function]}
+        style={
+          Object {
+            "color": "#A9A9A9",
+            "fontSize": 16,
+          }
+        }
+      >
+        1.00
+      </Themed.Text>
+    </View>
+  }
+  title="Wed 3rd"
+/>
+`;
+
+exports[`Day renders correctly for the 3rd on the 4th of April 2019 with the input showing 1`] = `
+<Themed.ListItem
+  rightElement={
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "borderColor": "pink",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "height": 44,
+          "justifyContent": "center",
+          "paddingRight": 5,
+          "width": 100,
+        }
+      }
+    >
+      <ForwardRef(Themed.Input)
+        autoFocus={true}
+        containerStyle={
+          Object {
+            "paddingHorizontal": 0,
+          }
+        }
+        inputContainerStyle={
+          Object {
+            "borderBottomWidth": 0,
+          }
+        }
+        inputStyle={
+          Object {
+            "fontSize": 16,
+            "marginRight": 0,
+            "paddingRight": 0,
+            "paddingVertical": 0,
+            "textAlign": "right",
+          }
+        }
+        keyboardType="numeric"
+        onChangeText={[Function]}
+        onEndEditing={[Function]}
+        placeholder="1.00"
+        placeholderTextColor="#A9A9A9"
+        value=""
+      />
+    </View>
+  }
+  title="Wed 3rd"
+/>
+`;
+
+exports[`Day renders correctly for the 5th on the 4th of April 2019 1`] = `
+<Themed.ListItem
+  rightElement={
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "borderColor": "pink",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "height": 44,
+          "justifyContent": "center",
+          "paddingRight": 5,
+          "width": 100,
+        }
+      }
+    >
+      <Themed.Text
+        onPress={[Function]}
+        style={
+          Object {
+            "color": "#A9A9A9",
+            "fontSize": 16,
+          }
+        }
+      >
+        1.00
+      </Themed.Text>
+    </View>
+  }
+  title="Tue 5th"
+/>
+`;
+
+exports[`Day renders correctly for the 5th on the 4th of April 2019 with the input showing 1`] = `
+<Themed.ListItem
+  rightElement={
+    <View
+      style={
+        Object {
+          "alignItems": "flex-end",
+          "borderColor": "pink",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "height": 44,
+          "justifyContent": "center",
+          "paddingRight": 5,
+          "width": 100,
+        }
+      }
+    >
+      <ForwardRef(Themed.Input)
+        autoFocus={true}
+        containerStyle={
+          Object {
+            "paddingHorizontal": 0,
+          }
+        }
+        inputContainerStyle={
+          Object {
+            "borderBottomWidth": 0,
+          }
+        }
+        inputStyle={
+          Object {
+            "fontSize": 16,
+            "marginRight": 0,
+            "paddingRight": 0,
+            "paddingVertical": 0,
+            "textAlign": "right",
+          }
+        }
+        keyboardType="numeric"
+        onChangeText={[Function]}
+        onEndEditing={[Function]}
+        placeholder="1.00"
+        placeholderTextColor="#A9A9A9"
+        value=""
+      />
+    </View>
+  }
+  title="Tue 5th"
 />
 `;
