@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.119",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "react": "16.6.3",
     "react-native": "0.57.8",
     "react-native-custom-picker": "^0.3.1",
