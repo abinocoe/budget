@@ -1,176 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-ShallowWrapper {
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <BudgetCalculator />,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "checkPropTypes": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateError": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "class",
-    "props": Object {
-      "children": Array [
-        <RemainderCalculations
-          dailyAllowance={1613}
-          daysElapsed={1}
-          daysRemaining={31}
-          intervalStartDate={25}
-          totalAllowance={50000}
-          totalSpent={0}
-          updateAllowance={[Function]}
-          updateIntervalStartDate={[Function]}
-        />,
-        <DayInputsContainer
-          amountsSpentLastMonth={Object {}}
-          amountsSpentThisMonth={Object {}}
-          startNumber={25}
-          updateAmountSpent={[Function]}
-        />,
-      ],
-      "style": Object {
-        "flex": 1,
-        "marginHorizontal": "5%",
-      },
-    },
-    "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "dailyAllowance": 1613,
-          "daysElapsed": 1,
-          "daysRemaining": 31,
-          "intervalStartDate": 25,
-          "totalAllowance": 50000,
-          "totalSpent": 0,
-          "updateAllowance": [Function],
-          "updateIntervalStartDate": [Function],
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "amountsSpentLastMonth": Object {},
-          "amountsSpentThisMonth": Object {},
-          "startNumber": 25,
-          "updateAmountSpent": [Function],
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-    ],
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
+<View
+  style={
     Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "class",
-      "props": Object {
-        "children": Array [
-          <RemainderCalculations
-            dailyAllowance={1613}
-            daysElapsed={1}
-            daysRemaining={31}
-            intervalStartDate={25}
-            totalAllowance={50000}
-            totalSpent={0}
-            updateAllowance={[Function]}
-            updateIntervalStartDate={[Function]}
-          />,
-          <DayInputsContainer
-            amountsSpentLastMonth={Object {}}
-            amountsSpentThisMonth={Object {}}
-            startNumber={25}
-            updateAmountSpent={[Function]}
-          />,
-        ],
-        "style": Object {
-          "flex": 1,
-          "marginHorizontal": "5%",
-        },
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "dailyAllowance": 1613,
-            "daysElapsed": 1,
-            "daysRemaining": 31,
-            "intervalStartDate": 25,
-            "totalAllowance": 50000,
-            "totalSpent": 0,
-            "updateAllowance": [Function],
-            "updateIntervalStartDate": [Function],
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "amountsSpentLastMonth": Object {},
-            "amountsSpentThisMonth": Object {},
-            "startNumber": 25,
-            "updateAmountSpent": [Function],
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-      ],
-      "type": [Function],
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-        "legacyContextMode": "parent",
-        "lifecycles": Object {
-          "componentDidUpdate": Object {
-            "onSetState": true,
-          },
-          "getChildContext": Object {
-            "calledByRenderer": false,
-          },
-          "getDerivedStateFromError": true,
-          "getDerivedStateFromProps": Object {
-            "hasShouldComponentUpdateBug": false,
-          },
-          "getSnapshotBeforeUpdate": true,
-          "setState": Object {
-            "skipsComponentDidUpdateOnNullish": true,
-          },
-        },
-      },
-    },
-    Symbol(enzyme.__providerValues__): undefined,
-  },
-  Symbol(enzyme.__providerValues__): Map {},
-  Symbol(enzyme.__childContext__): null,
-}
+      "flex": 1,
+      "marginHorizontal": "5%",
+    }
+  }
+>
+  <RemainderCalculations
+    dailyAllowance={1613}
+    daysElapsed={25}
+    daysRemaining={7}
+    intervalStartDate={1}
+    totalAllowance={50000}
+    totalSpent={0}
+    updateAllowance={[Function]}
+    updateIntervalStartDate={[Function]}
+  />
+  <DayInputsContainer
+    amountsSpentPeriodEndMonth={Object {}}
+    amountsSpentPeriodStartMonth={Object {}}
+    startNumber={1}
+    updateAmountSpent={[Function]}
+  />
+</View>
 `;

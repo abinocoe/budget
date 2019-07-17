@@ -1,0 +1,207 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RemainderCalculations renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "row",
+      "justifyContent": "space-evenly",
+      "marginTop": 20,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "justifyContent": "flex-start",
+      }
+    }
+  >
+    <PeriodAllowanceInput
+      allowanceAmount={30000}
+      updateAllowance={[Function]}
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+        }
+      }
+    >
+      <Text
+        onPress={[Function]}
+        style={
+          Array [
+            Object {
+              "borderRadius": 5,
+              "color": "white",
+              "elevation": 3,
+              "fontSize": 30,
+              "marginBottom": 5,
+              "marginTop": 10,
+              "paddingHorizontal": 5,
+              "textAlign": "center",
+              "width": "90%",
+            },
+            Object {
+              "backgroundColor": "#AB47BC",
+            },
+          ]
+        }
+        testID="totalRemain"
+      >
+        270.00
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 12,
+          }
+        }
+      >
+        Total remaining
+      </Text>
+    </View>
+    <DateSelection
+      intervalStartDate={25}
+      updateIntervalStartDate={[Function]}
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "justifyContent": "flex-start",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+        }
+      }
+    >
+      <Text
+        onPress={[Function]}
+        style={
+          Array [
+            Object {
+              "borderRadius": 5,
+              "color": "white",
+              "elevation": 3,
+              "fontSize": 30,
+              "marginBottom": 5,
+              "marginTop": 10,
+              "paddingHorizontal": 5,
+              "textAlign": "center",
+              "width": "90%",
+            },
+            Object {
+              "backgroundColor": "#4CAF50",
+            },
+          ]
+        }
+      >
+        10.00
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 12,
+          }
+        }
+      >
+        Daily allowance
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+        }
+      }
+    >
+      <Text
+        onPress={[Function]}
+        style={
+          Array [
+            Object {
+              "borderRadius": 5,
+              "color": "white",
+              "elevation": 3,
+              "fontSize": 30,
+              "marginBottom": 5,
+              "marginTop": 10,
+              "paddingHorizontal": 5,
+              "textAlign": "center",
+              "width": "90%",
+            },
+            Object {
+              "backgroundColor": "#FFEB3B",
+            },
+          ]
+        }
+        testID="averageRemain"
+      >
+        9.31
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 12,
+          }
+        }
+      >
+        Average per day remain
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+        }
+      }
+    >
+      <Text
+        onPress={[Function]}
+        style={
+          Array [
+            Object {
+              "borderRadius": 5,
+              "color": "white",
+              "elevation": 3,
+              "fontSize": 30,
+              "marginBottom": 5,
+              "marginTop": 10,
+              "paddingHorizontal": 5,
+              "textAlign": "center",
+              "width": "90%",
+            },
+            Object {
+              "backgroundColor": "#FF9800",
+            },
+          ]
+        }
+        testID="amountDebit"
+      >
+        -10.00
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 12,
+          }
+        }
+      >
+        Amount debit
+      </Text>
+    </View>
+  </View>
+  <TooltipModal
+    description=""
+    hideModal={[Function]}
+    isVisible={false}
+    title=""
+  />
+</View>
+`;

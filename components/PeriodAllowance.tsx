@@ -83,6 +83,7 @@ class PeriodAllowanceInput extends Component<Props> {
         ) : (
           <View style={{ alignItems: "center" }}>
             <Input
+              testID="input"
               autoFocus={true}
               containerStyle={{
                 marginTop: 10,
@@ -90,7 +91,7 @@ class PeriodAllowanceInput extends Component<Props> {
                 backgroundColor: "pink",
                 width: "90%",
                 borderRadius: 5,
-                elevation: 2,
+                elevation: 3,
                 height: 40
               }}
               style={{ color: "white" }}

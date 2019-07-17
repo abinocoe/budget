@@ -4,8 +4,8 @@
     "tslint:latest",
     "tslint-react",
     "tslint-config-airbnb",
-    "tslint-config-prettier",
-    "tslint-config-security"
+    "tslint-config-security",
+    "tslint-config-prettier"
   ],
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
@@ -17,12 +17,13 @@
       }
     ],
     "import-name": false,
+    "prettier": true,
     "variable-name": [true, "allow-pascal-case", "allow-leading-underscore"],
     "interface-name": false,
     "no-implicit-dependencies": false,
-    "prettier": true,
     "jsx-no-lambda": false,
     "no-namespace": [true, "allow-declarations"],
-    "max-classes-per-file": false
+    "max-classes-per-file": false,
+    "array-type": [true, "array"]
   }
 }
